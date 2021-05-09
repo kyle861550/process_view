@@ -2,13 +2,20 @@ package com.alien.process_view.process_view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import com.alien.process_view.process_view.path.ArrowPath;
+import com.alien.process_view.process_view.path.BlockPath;
+
 public class CubeProcessView extends ProcessView {
+
+    private final ArrowPath blockPath = new ArrowPath();
 
     private ProcessViewInfo.DrawTools drawTools;
     private ProcessViewInfo.ViewAttr viewAttr;
@@ -37,33 +44,20 @@ public class CubeProcessView extends ProcessView {
         usefulHeight = viewInfo.usefulHeight;
         usefulWidth = viewInfo.usefulWidth;
 
-        drawBlock();
+        drawBlock(viewInfo);
 
         drawBold();
 
         drawText();
     }
 
-    private void drawBlock() {
+    private void drawBlock(ProcessViewInfo viewInfo) {
         Paint blockPaint = drawTools.blockPaint;
 
-        // 每個區塊的寬度 (高度都一樣)
-        int[] blocksWidth = viewAttr.getBlocksWidth();
-        // 每個區塊中間的間隔
-        int space = viewAttr.betweenSpace / 2;
+        Path[] pathResult = blockPath.getPath(viewInfo);
 
-        int startX = 0, endX;
-        for(int i = 0; i < blocksWidth.length; i++) {
-            int width = blocksWidth[i];
-
-            // TODO: 最後一個會有空位
-            endX = startX + width - space;
-            Rect rect = new Rect(startX, 0, endX, usefulHeight);
-            startX = endX + space;
-
-            // TODO: 添加顏色
-//            blockPaint.setColor(viewAttr.getBoldColors()[i]);
-            canvas.drawRect(rect, blockPaint);
+        for(Path path : pathResult) {
+            canvas.drawPath(path, blockPaint);
         }
 
     }

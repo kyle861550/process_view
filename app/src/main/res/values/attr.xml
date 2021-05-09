@@ -19,6 +19,12 @@
 
         <attr name="between_space" format="integer"/>
 
+        <attr name="show_part" format="flags">
+            <flag name="UPPER" value="0x0000"/>
+            <flag name="BELOW" value="0x0001"/>
+            <flag name="BOTH" value="0x0002"/>
+        </attr>
+
     </declare-styleable>
 
 </resources>

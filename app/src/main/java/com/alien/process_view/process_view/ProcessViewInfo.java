@@ -39,7 +39,7 @@ public class ProcessViewInfo implements ViewInfo {
             for(int item : blockPercent) {
                 total += item;
             }
-            return total;
+            return total == 0 ? 1 : total;
         }
 
         public int[] getBlocksWidth() {
