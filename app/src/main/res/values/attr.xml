@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="process_view">
+        <attr name="bold_width" format="float"/>
+        <attr name="bold_colors" format="reference"/>
+        <attr name="block_colors" format="reference"/>
+
+        <attr name="direction" format="enum">
+            <enum name="RIGHT" value="0"/>
+            <enum name="LEFT" value="1"/>
+        </attr>
+
+        <attr name="angle" format="float"/>
+        <attr name="enable_cycle_line" format="boolean"/>
+        <attr name="process_count" format="integer"/>
+        <attr name="text_color" format="color"/>
+        <attr name="block_percent" format="reference"/>
+
+        <attr name="between_space" format="integer"/>
+
+    </declare-styleable>
+
+</resources>
