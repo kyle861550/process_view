@@ -87,7 +87,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         boldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         boldPaint.setAntiAlias(true);
         boldPaint.setStyle(Paint.Style.STROKE);
-        boldPaint.setColor(Color.BLACK);
+        boldPaint.setColor(Color.YELLOW);
 
         blockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         blockPaint.setAntiAlias(true);

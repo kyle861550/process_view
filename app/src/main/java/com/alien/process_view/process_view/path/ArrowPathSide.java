@@ -6,9 +6,9 @@ import android.util.Log;
 import com.alien.process_view.base.PathInfo;
 import com.alien.process_view.process_view.ProcessViewInfo;
 
-public class ArrowPath implements BlockPath<ProcessViewInfo> {
+public class ArrowPathSide implements BlockPath<ProcessViewInfo> {
 
-    private static final String TAG = ArrowPath.class.getSimpleName();
+    private static final String TAG = ArrowPathSide.class.getSimpleName();
 
     private ProcessViewInfo viewInfo;
     private ProcessViewInfo.ViewAttr viewAttr;
@@ -26,7 +26,7 @@ public class ArrowPath implements BlockPath<ProcessViewInfo> {
 
     private void calcX1() {
         float x = nextStartPoint.x;
-        float y = (viewInfo.usefulHeight / 2f);
+        float y = 0;
 
         curPath.moveTo(x, y);
 
@@ -36,7 +36,7 @@ public class ArrowPath implements BlockPath<ProcessViewInfo> {
     private void calcX2(int index) {
         int blockWidth = viewAttr.getBlocksWidth()[index];
         float x = curPathInfo.x + blockWidth;
-        float y = curPathInfo.y;
+        float y = 0;
 
         curPath.lineTo(x, y);
 
@@ -48,14 +48,12 @@ public class ArrowPath implements BlockPath<ProcessViewInfo> {
 
     private void calcX3() {
         float x = curPathInfo.x;
-        float y = 0;
-
-        float height = curPathInfo.y;
+        float y = (viewInfo.usefulHeight / 2f);
 
         double viewAngle = Math.toRadians(viewAttr.viewAngle);
         double tan = Math.tan(viewAngle);
-        double length = height * tan;
-        x = (float) (x - length);
+        double length = y * tan;
+        x = (float) (x + length);
 
         curPath.lineTo(x, y);
 
@@ -64,7 +62,7 @@ public class ArrowPath implements BlockPath<ProcessViewInfo> {
 
     private void calcX4(int index) {
         float x = 0;
-        float y = 0;
+        float y = curPathInfo.y;
 
         if(index != 0) {
             x = nextEndPoint.x;
@@ -101,6 +99,5 @@ public class ArrowPath implements BlockPath<ProcessViewInfo> {
 
         return results;
     }
-
 
 }

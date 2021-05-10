@@ -6,6 +6,6 @@ import com.alien.process_view.base.ViewInfo;
 
 public interface BlockPath<T extends ViewInfo> {
 
-    Path[] getPath(T info);
+    Path[] getPath(T viewInfo);
 
 }

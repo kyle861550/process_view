@@ -2,20 +2,20 @@ package com.alien.process_view.process_view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import com.alien.process_view.process_view.path.ArrowPath;
+import com.alien.process_view.base.ViewInfo;
+import com.alien.process_view.process_view.path.ArrowPathCenter;
+import com.alien.process_view.process_view.path.ArrowPathSide;
 import com.alien.process_view.process_view.path.BlockPath;
 
 public class CubeProcessView extends ProcessView {
 
-    private final ArrowPath blockPath = new ArrowPath();
+    private final BlockPath<ProcessViewInfo> blockPath = new ArrowPathSide();
 
     private ProcessViewInfo.DrawTools drawTools;
     private ProcessViewInfo.ViewAttr viewAttr;
