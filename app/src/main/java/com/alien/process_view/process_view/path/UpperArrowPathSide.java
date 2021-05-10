@@ -6,9 +6,9 @@ import android.util.Log;
 import com.alien.process_view.base.PathInfo;
 import com.alien.process_view.process_view.ProcessViewInfo;
 
-public class ArrowPathSide implements BlockPath<ProcessViewInfo> {
+public class UpperArrowPathSide implements BlockPath<ProcessViewInfo> {
 
-    private static final String TAG = ArrowPathSide.class.getSimpleName();
+    private static final String TAG = UpperArrowPathSide.class.getSimpleName();
 
     private ProcessViewInfo viewInfo;
     private ProcessViewInfo.ViewAttr viewAttr;
@@ -55,6 +55,7 @@ public class ArrowPathSide implements BlockPath<ProcessViewInfo> {
         double length = y * tan;
         x = (float) (x + length);
 
+        //TODO: 超出邊界
 //        if(x > viewInfo.usefulWidth) {
 //            x = viewInfo.usefulWidth - viewAttr.betweenSpace;
 //            y = y - viewAttr.betweenSpace;

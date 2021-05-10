@@ -6,9 +6,9 @@ import android.util.Log;
 import com.alien.process_view.base.PathInfo;
 import com.alien.process_view.process_view.ProcessViewInfo;
 
-public class ArrowPathCenter implements BlockPath<ProcessViewInfo> {
+public class UpperArrowPathCenter implements BlockPath<ProcessViewInfo> {
 
-    private static final String TAG = ArrowPathCenter.class.getSimpleName();
+    private static final String TAG = UpperArrowPathCenter.class.getSimpleName();
 
     private ProcessViewInfo viewInfo;
     private ProcessViewInfo.ViewAttr viewAttr;

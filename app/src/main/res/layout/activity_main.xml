@@ -9,7 +9,7 @@
 
     <com.alien.process_view.process_view.CubeProcessView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="75dp"
         app:angle="45"
         app:between_space="10"
         app:process_count="3"
