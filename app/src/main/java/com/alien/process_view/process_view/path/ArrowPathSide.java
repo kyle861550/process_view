@@ -55,6 +55,11 @@ public class ArrowPathSide implements BlockPath<ProcessViewInfo> {
         double length = y * tan;
         x = (float) (x + length);
 
+//        if(x > viewInfo.usefulWidth) {
+//            x = viewInfo.usefulWidth - viewAttr.betweenSpace;
+//            y = y - viewAttr.betweenSpace;
+//        }
+
         curPath.lineTo(x, y);
 
         curPathInfo = new PathInfo(x, y);

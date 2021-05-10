@@ -15,13 +15,15 @@ import com.alien.process_view.process_view.path.BlockPath;
 
 public class CubeProcessView extends ProcessView {
 
-    private final BlockPath<ProcessViewInfo> blockPath = new ArrowPathSide();
+    private final BlockPath<ProcessViewInfo> blockPath = new ArrowPathCenter();
 
     private ProcessViewInfo.DrawTools drawTools;
     private ProcessViewInfo.ViewAttr viewAttr;
 
     private Canvas canvas;
     private int usefulHeight, usefulWidth;
+
+    private Path[] pathResult;
 
     public CubeProcessView(Context context) {
         super(context);
@@ -54,7 +56,7 @@ public class CubeProcessView extends ProcessView {
     private void drawBlock(ProcessViewInfo viewInfo) {
         Paint blockPaint = drawTools.blockPaint;
 
-        Path[] pathResult = blockPath.getPath(viewInfo);
+        pathResult = blockPath.getPath(viewInfo);
 
         for(Path path : pathResult) {
             canvas.drawPath(path, blockPaint);
@@ -64,6 +66,10 @@ public class CubeProcessView extends ProcessView {
 
     private void drawBold() {
         Paint boldPaint = drawTools.boldPaint;
+
+        for(Path path : pathResult) {
+            canvas.drawPath(path, boldPaint);
+        }
 
     }
 
