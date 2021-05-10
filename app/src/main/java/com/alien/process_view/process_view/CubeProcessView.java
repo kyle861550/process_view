@@ -9,12 +9,13 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 
 import com.alien.process_view.process_view.path.FullArrow;
+import com.alien.process_view.process_view.path.FullArrowBlockEnd;
 import com.alien.process_view.process_view.path.UpperArrowPathCenter;
 import com.alien.process_view.process_view.path.BlockPath;
 
 public class CubeProcessView extends ProcessView {
 
-    private final BlockPath<ProcessViewInfo> blockPath = new FullArrow();
+    private final BlockPath<ProcessViewInfo> blockPath = new FullArrowBlockEnd();
 
     private ProcessViewInfo.DrawTools drawTools;
     private ProcessViewInfo.ViewAttr viewAttr;
