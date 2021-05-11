@@ -7,18 +7,19 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import androidx.annotation.IntRange;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 
 import com.alien.process_view.process_view.base.ProcessView;
 import com.alien.process_view.process_view.base.ProcessViewInfo;
+import com.alien.process_view.process_view.path.ArrowTypeManager;
 import com.alien.process_view.process_view.path.BlockPath;
-import com.alien.process_view.process_view.path.FullArrowBlockEnd;
 
 public class CubeProcessView extends ProcessView {
 
     private static final String TAG = CubeProcessView.class.getSimpleName();
-    private final BlockPath<ProcessViewInfo> blockPath = new FullArrowBlockEnd();
+    private BlockPath<ProcessViewInfo> blockPath;
 
     private ProcessViewInfo.DrawTools drawTools;
     private ProcessViewInfo.ViewAttr viewAttr;
@@ -45,7 +46,9 @@ public class CubeProcessView extends ProcessView {
         this.drawTools = viewInfo.getDrawTools();
         this.viewAttr = viewInfo.getViewAttr();
 
-        pathResult = getArrowBlockPath().getPath(viewInfo);
+        blockPath = blockPath == null ? getArrowBlockPath() : blockPath;
+
+        pathResult = blockPath.getPath(viewInfo);
 
         drawBlock();
 
@@ -128,12 +131,27 @@ public class CubeProcessView extends ProcessView {
         invalidate();
     }
 
+    @MainThread
     public void setCount(int value) {
         if(value < 0) {
             value = 0;
         }
 
         viewAttr.blockCount = value;
+
+        invalidate();
+    }
+
+    @MainThread
+    public void setArrowType(@ArrowTypeManager.ArrowType int type) {
+        blockPath = ArrowTypeManager.getBlockPath(type);
+
+        invalidate();
+    }
+
+    @MainThread
+    public void setAngle(@IntRange(from = 1, to = 179) int value) {
+        viewAttr.viewAngle = value;
 
         invalidate();
     }

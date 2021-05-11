@@ -29,12 +29,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <Button
+            android:id="@+id/change_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            app:layout_constraintTop_toBottomOf="@id/reduce_count"
+            app:layout_constraintBottom_toTopOf="@id/progress"/>
+
         <com.alien.process_view.process_view.CubeProcessView
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             app:texts="@array/texts"
-            app:angle="20"
+            app:angle="25"
             app:bolder_width="2.5"
             app:between_space="10"
             app:block_count="3"
@@ -49,6 +57,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <SeekBar
+            android:id="@+id/angle_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="179"
+            android:min="1"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            app:layout_constraintBottom_toTopOf="@id/add"/>
 
         <Button
             android:id="@+id/reduce"
