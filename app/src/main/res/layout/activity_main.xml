@@ -10,9 +10,11 @@
     <com.alien.process_view.process_view.CubeProcessView
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:angle="45"
+        app:angle="20"
+        app:bolder_width="2.5"
         app:between_space="10"
-        app:process_count="3"
+        app:block_count="3"
+        app:block_progress="1"
         app:block_percent="@array/counts"
         app:layout_constraintTop_toTopOf="parent"/>
 

@@ -9,29 +9,16 @@ public class ProcessViewInfo implements ViewInfo {
     public static final class ViewAttr {
         public int usefulWidth;
 
-        public int viewCount, betweenSpace;
+        public int blockCount, blockProgress, betweenSpace;
         public float viewAngle;
         public ProcessView.Direction viewDirection;
 
         public boolean enableCycleLine;
 
         public int textColor;
-        public int[] boldColors;
-        public int[] blockColors;
         public int[] blockPercent;
-
-        public int[] getBoldColors() {
-            int[] result = boldColors;
-            if(result == null) {
-                result = new int[viewCount];
-            }
-
-            if(viewCount != result.length) {
-                result = new int[viewCount];
-                System.arraycopy(blockColors, 0, result, 0, blockColors.length);
-            }
-            return result;
-        }
+        public int blockSelectedColor;
+        public int blockUnselectedColor;
 
         // 計算總分配
         private int getTotalPercent() {
@@ -60,7 +47,7 @@ public class ProcessViewInfo implements ViewInfo {
     }
 
     public static final class DrawTools {
-        public Paint boldPaint, blockPaint, textPaint;
+        public Paint bolderPaint, blockPaint, textPaint;
     }
 
     public int usefulWidth;

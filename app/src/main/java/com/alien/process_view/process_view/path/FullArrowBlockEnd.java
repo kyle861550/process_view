@@ -51,7 +51,7 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
     }
 
     private boolean isLastBlock() {
-        return curIndex == viewAttr.viewCount - 1;
+        return curIndex == viewAttr.blockCount - 1;
     }
 
     private void calcX1() {
@@ -141,7 +141,7 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
 
         prepareTools(viewInfo);
 
-        Path[] results = new Path[viewAttr.viewCount];
+        Path[] results = new Path[viewAttr.blockCount];
 
         for(int i = 0; i < results.length; i++) {
             curIndex = i;

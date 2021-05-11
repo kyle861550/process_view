@@ -88,7 +88,7 @@ public class UpperArrowPathSide implements BlockPath<ProcessViewInfo> {
 
         prepareTools(viewInfo);
 
-        Path[] results = new Path[viewAttr.viewCount];
+        Path[] results = new Path[viewAttr.blockCount];
 
         for(int i = 0; i < results.length; i++) {
             curPath = new Path();

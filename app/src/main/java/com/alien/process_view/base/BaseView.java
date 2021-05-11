@@ -3,12 +3,14 @@ package com.alien.process_view.base;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 /**
  * View 建構基本資訊 & 架構 & 設定
@@ -68,12 +70,30 @@ public abstract class BaseView<T extends ViewInfo> extends View {
             return null;
         }
 
-        int id = 0;
-        id = typedArray.getResourceId(styleableId, id);
+        int defaultId = 0;
+        defaultId = typedArray.getResourceId(styleableId, defaultId);
 
-        if(id != 0) {
-            result = getResources().getIntArray(id);
+        if(defaultId != 0) {
+            result = getResources().getIntArray(defaultId);
         }
+        return result;
+    }
+
+    protected Drawable getDrawableFromRefs(int styleableId) {
+        Drawable result = null;
+
+        if(typedArray == null) {
+            Log.e(TAG, "TypedArray is null");
+            return null;
+        }
+
+        int defaultId = 0;
+        defaultId = typedArray.getResourceId(styleableId, defaultId);
+
+        if(defaultId != 0) {
+            result = AppCompatResources.getDrawable(getContext(), defaultId);
+        }
+
         return result;
     }
 

@@ -2,9 +2,16 @@
 <resources>
 
     <declare-styleable name="process_view">
-        <attr name="bold_width" format="float"/>
-        <attr name="bold_colors" format="reference"/>
-        <attr name="block_colors" format="reference"/>
+        <attr name="bolder_width" format="float"/>
+        <attr name="bolder_color" format="color"/>
+
+        <attr name="block_count" format="integer"/>
+        <attr name="block_progress" format="integer"/>
+        <attr name="block_selected_color" format="color"/>
+        <attr name="block_unselected_color" format="color"/>
+        <attr name="block_selected_drawable" format="reference"/>
+
+        <attr name="text_color" format="color"/>
 
         <attr name="direction" format="enum">
             <enum name="RIGHT" value="0"/>
@@ -13,8 +20,6 @@
 
         <attr name="angle" format="float"/>
         <attr name="enable_cycle_line" format="boolean"/>
-        <attr name="process_count" format="integer"/>
-        <attr name="text_color" format="color"/>
         <attr name="block_percent" format="reference"/>
 
         <attr name="between_space" format="integer"/>

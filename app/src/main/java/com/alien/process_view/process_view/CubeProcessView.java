@@ -8,10 +8,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import com.alien.process_view.process_view.path.FullArrow;
-import com.alien.process_view.process_view.path.FullArrowBlockEnd;
-import com.alien.process_view.process_view.path.UpperArrowPathCenter;
 import com.alien.process_view.process_view.path.BlockPath;
+import com.alien.process_view.process_view.path.FullArrowBlockEnd;
 
 public class CubeProcessView extends ProcessView {
 
@@ -21,7 +19,6 @@ public class CubeProcessView extends ProcessView {
     private ProcessViewInfo.ViewAttr viewAttr;
 
     private Canvas canvas;
-    private int usefulHeight, usefulWidth;
 
     private Path[] pathResult;
 
@@ -43,29 +40,32 @@ public class CubeProcessView extends ProcessView {
         this.drawTools = viewInfo.getDrawTools();
         this.viewAttr = viewInfo.getViewAttr();
 
-        usefulHeight = viewInfo.usefulHeight;
-        usefulWidth = viewInfo.usefulWidth;
+        pathResult = blockPath.getPath(viewInfo);
 
-        drawBlock(viewInfo);
+        drawBlock();
 
         drawBold();
 
         drawText();
     }
 
-    private void drawBlock(ProcessViewInfo viewInfo) {
+    private void drawBlock() {
         Paint blockPaint = drawTools.blockPaint;
 
-        pathResult = blockPath.getPath(viewInfo);
+        for(int i = 0; i < pathResult.length; i++) {
+            Path path = pathResult[i];
 
-        for(Path path : pathResult) {
+            if(i > (viewAttr.blockProgress - 1)) {
+                // 未被選擇區塊的顏色
+                blockPaint.setColor(viewAttr.blockUnselectedColor);
+            }
+
             canvas.drawPath(path, blockPaint);
         }
-
     }
 
     private void drawBold() {
-        Paint boldPaint = drawTools.boldPaint;
+        Paint boldPaint = drawTools.bolderPaint;
 
         for(Path path : pathResult) {
             canvas.drawPath(path, boldPaint);
