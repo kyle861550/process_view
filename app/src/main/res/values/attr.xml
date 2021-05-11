@@ -8,8 +8,8 @@
         <attr name="block_count" format="integer"/>
         <attr name="block_progress" format="integer"/>
         <attr name="block_selected_color" format="color"/>
+        <attr name="block_selected_colors" format="reference"/>
         <attr name="block_unselected_color" format="color"/>
-        <attr name="block_selected_drawable" format="reference"/>
 
         <attr name="text_color" format="color"/>
 

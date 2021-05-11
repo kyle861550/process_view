@@ -5,4 +5,9 @@
         <item>1</item>
         <item>1</item>
     </integer-array>
+
+    <integer-array name="selected_colors">
+        <item>@android:color/holo_purple</item>
+        <item>@android:color/holo_red_light</item>
+    </integer-array>
 </resources>

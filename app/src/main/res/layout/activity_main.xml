@@ -14,8 +14,11 @@
         app:bolder_width="2.5"
         app:between_space="10"
         app:block_count="3"
-        app:block_progress="1"
+        app:block_progress="2"
         app:block_percent="@array/counts"
+        app:block_selected_color="#F85F05"
+        app:block_selected_colors="@array/selected_colors"
+        app:block_unselected_color="#00000000"
         app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
@@ -34,7 +33,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     private int blockCount, blockProgress;
     private int blockSelectedColor;
     private int blockUnselectedColor;
-    private Drawable blockDrawable;
+    private int[] blockColors;
     private int[] blockPercent;
 
 /// View Tools
@@ -87,9 +86,8 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         blockProgress = typedArray.getInt(R.styleable.process_view_block_progress, 1);
         blockSelectedColor = typedArray.getColor(R.styleable.process_view_block_selected_color, Color.RED);
         blockUnselectedColor = typedArray.getColor(R.styleable.process_view_block_unselected_color, Color.GRAY);
-        blockDrawable = typedArray.getDrawable(R.styleable.process_view_block_selected_drawable);
-        blockDrawable = getDrawableFromRefs(R.styleable.process_view_block_selected_drawable);
 
+        blockColors = getArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
         blockPercent = getArrayAttrsFromRefs(R.styleable.process_view_block_percent);
 
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
@@ -134,6 +132,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.blockPercent = blockPercent;
         viewAttr.blockSelectedColor = blockSelectedColor;
         viewAttr.blockUnselectedColor = blockUnselectedColor;
+        viewAttr.blockColors = blockColors;
 
         return processViewInfo;
     }

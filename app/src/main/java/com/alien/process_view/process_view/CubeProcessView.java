@@ -51,6 +51,7 @@ public class CubeProcessView extends ProcessView {
 
     private void drawBlock() {
         Paint blockPaint = drawTools.blockPaint;
+        blockPaint.setShader(viewAttr.getShader());
 
         for(int i = 0; i < pathResult.length; i++) {
             Path path = pathResult[i];
@@ -77,4 +78,5 @@ public class CubeProcessView extends ProcessView {
         Paint textPaint = drawTools.textPaint;
 
     }
+
 }

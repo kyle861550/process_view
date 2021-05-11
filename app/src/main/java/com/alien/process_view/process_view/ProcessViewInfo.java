@@ -1,12 +1,16 @@
 package com.alien.process_view.process_view;
 
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Shader;
 
 import com.alien.process_view.base.ViewInfo;
 
 public class ProcessViewInfo implements ViewInfo {
 
     public static final class ViewAttr {
+        private ProcessViewInfo viewInfo;
+
         public int usefulWidth;
 
         public int blockCount, blockProgress, betweenSpace;
@@ -19,6 +23,30 @@ public class ProcessViewInfo implements ViewInfo {
         public int[] blockPercent;
         public int blockSelectedColor;
         public int blockUnselectedColor;
+        public int[] blockColors;
+
+        private Shader shader;
+
+        public Shader getShader() {
+            if(shader != null) {
+                return shader;
+            }
+
+            int middlePointX = viewInfo.usefulWidth / 2;
+
+            shader = new LinearGradient(
+                    middlePointX,
+                    0,
+                    middlePointX,
+                    viewInfo.usefulHeight,
+                    blockColors,
+                    null,
+                    Shader.TileMode.CLAMP
+            );
+
+
+            return shader;
+        }
 
         // 計算總分配
         private int getTotalPercent() {
@@ -47,6 +75,7 @@ public class ProcessViewInfo implements ViewInfo {
     }
 
     public static final class DrawTools {
+        private ProcessViewInfo viewInfo;
         public Paint bolderPaint, blockPaint, textPaint;
     }
 
@@ -71,6 +100,9 @@ public class ProcessViewInfo implements ViewInfo {
 
     @Override
     public void setUsefulSpace(int width, int height) {
+        viewAttr.viewInfo = this;
+        drawTools.viewInfo = this;
+
         usefulWidth = viewAttr.usefulWidth = width;
         usefulHeight = height;
     }
