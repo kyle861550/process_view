@@ -23,6 +23,7 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
 
     private Path curPath;
     private PathInfo curPathInfo = new PathInfo();
+    private PathInfo curStartPoint = new PathInfo();
 
     private PathInfo nextStartPoint = new PathInfo();
     private PathInfo nextEndPoint = new PathInfo();
@@ -61,6 +62,8 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
         curPath.moveTo(x, y);
 
         curPathInfo = new PathInfo(x, y);
+
+        curStartPoint = new PathInfo(curPathInfo);
     }
 
     private void calcX2() {
@@ -125,7 +128,9 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
         }
         curPath.lineTo(x, y);
 
-        curPath.close();
+        // TODO: 其他類型的也要修正掉
+//        curPath.close();
+        curPath.lineTo(curStartPoint.x, curStartPoint.y);
 
         nextEndPoint = new PathInfo(curPathInfo, viewAttr.betweenSpace);
         nextArrowPoint = new PathInfo(
@@ -157,6 +162,8 @@ public class FullArrowBlockEnd implements BlockPath<ProcessViewInfo> {
 
             Log.d(TAG, "Make path: " + i);
         }
+
+        nextStartPoint = new PathInfo();
 
         return results;
     }
