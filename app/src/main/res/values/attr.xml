@@ -12,6 +12,7 @@
         <attr name="block_unselected_color" format="color"/>
 
         <attr name="text_color" format="color"/>
+        <attr name="texts" format="reference"/>
 
         <attr name="direction" format="enum">
             <enum name="RIGHT" value="0"/>
@@ -24,10 +25,11 @@
 
         <attr name="between_space" format="integer"/>
 
-        <attr name="show_part" format="flags">
-            <flag name="UPPER" value="0x0000"/>
-            <flag name="BELOW" value="0x0001"/>
-            <flag name="BOTH" value="0x0002"/>
+        <attr name="arrow_type" format="enum">
+            <enum name="FULL_ARROW" value="0x0000"/>
+            <enum name="FULL_ARROW_END" value="0x0001"/>
+            <enum name="UPPER_ARROW_CENTER" value="0x0002"/>
+            <enum name="UPPER_ARROW_SIDE" value="0x0003"/>
         </attr>
 
     </declare-styleable>

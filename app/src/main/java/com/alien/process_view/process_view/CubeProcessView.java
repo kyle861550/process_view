@@ -10,6 +10,8 @@ import android.util.Log;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 
+import com.alien.process_view.process_view.base.ProcessView;
+import com.alien.process_view.process_view.base.ProcessViewInfo;
 import com.alien.process_view.process_view.path.BlockPath;
 import com.alien.process_view.process_view.path.FullArrowBlockEnd;
 
@@ -43,7 +45,7 @@ public class CubeProcessView extends ProcessView {
         this.drawTools = viewInfo.getDrawTools();
         this.viewAttr = viewInfo.getViewAttr();
 
-        pathResult = blockPath.getPath(viewInfo);
+        pathResult = getArrowBlockPath().getPath(viewInfo);
 
         drawBlock();
 
@@ -83,6 +85,12 @@ public class CubeProcessView extends ProcessView {
 
     private void drawText() {
         Paint textPaint = drawTools.textPaint;
+
+        String[] texts = viewAttr.texts;
+        if(texts == null) {
+            return;
+        }
+
 
     }
 

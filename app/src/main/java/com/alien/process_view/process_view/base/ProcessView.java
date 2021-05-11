@@ -1,4 +1,4 @@
-package com.alien.process_view.process_view;
+package com.alien.process_view.process_view.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.alien.process_view.R;
 import com.alien.process_view.base.BaseView;
+import com.alien.process_view.process_view.path.ArrowTypeManager;
+import com.alien.process_view.process_view.path.BlockPath;
 
 /**
  * 分析使用者設定 & 打包 Draw 所需工具
@@ -35,6 +37,9 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     private int blockUnselectedColor;
     private int[] blockColors;
     private int[] blockPercent;
+    private String[] texts;
+
+    private BlockPath<ProcessViewInfo> arrowBlockPath;
 
 /// View Tools
     private Paint bolderPaint, blockPaint, textPaint;
@@ -87,10 +92,14 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         blockSelectedColor = typedArray.getColor(R.styleable.process_view_block_selected_color, Color.RED);
         blockUnselectedColor = typedArray.getColor(R.styleable.process_view_block_unselected_color, Color.GRAY);
 
-        blockColors = getArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
-        blockPercent = getArrayAttrsFromRefs(R.styleable.process_view_block_percent);
+        blockColors = getIntArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
+        blockPercent = getIntArrayAttrsFromRefs(R.styleable.process_view_block_percent);
 
+        texts = getStringArrayFromRefs(R.styleable.process_view_texts);
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
+
+        int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW_END);
+        arrowBlockPath = ArrowTypeManager.getBlockPath(arrowType);
     }
 
     @Override
@@ -133,6 +142,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.blockSelectedColor = blockSelectedColor;
         viewAttr.blockUnselectedColor = blockUnselectedColor;
         viewAttr.blockColors = blockColors;
+        viewAttr.texts = texts;
 
         return processViewInfo;
     }
@@ -142,4 +152,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         return ATTR_RES_IDS;
     }
 
+    protected BlockPath<ProcessViewInfo> getArrowBlockPath() {
+        return arrowBlockPath;
+    }
 }

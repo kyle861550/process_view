@@ -4,7 +4,7 @@ import android.graphics.Path;
 import android.util.Log;
 
 import com.alien.process_view.base.PathInfo;
-import com.alien.process_view.process_view.ProcessViewInfo;
+import com.alien.process_view.process_view.base.ProcessViewInfo;
 
 public class UpperArrowPathCenter implements BlockPath<ProcessViewInfo> {
 

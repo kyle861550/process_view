@@ -4,7 +4,7 @@ import android.graphics.Path;
 import android.util.Log;
 
 import com.alien.process_view.base.PathInfo;
-import com.alien.process_view.process_view.ProcessViewInfo;
+import com.alien.process_view.process_view.base.ProcessViewInfo;
 
 /**
  * 最後的箭頭要補滿

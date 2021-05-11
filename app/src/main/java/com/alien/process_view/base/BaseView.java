@@ -3,14 +3,12 @@ package com.alien.process_view.base;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 
 /**
  * View 建構基本資訊 & 架構 & 設定
@@ -61,17 +59,21 @@ public abstract class BaseView<T extends ViewInfo> extends View {
 
     protected abstract int[] styleAttrId();
 
-    @Nullable
-    protected int[] getArrayAttrsFromRefs(int styleableId) {
-        int[] result = null;
-
+    private int getResourceId(int styleableId) {
         if(typedArray == null) {
             Log.e(TAG, "TypedArray is null");
-            return null;
+            throw new NullPointerException("TypedArray obj is null.");
         }
 
         int defaultId = 0;
-        defaultId = typedArray.getResourceId(styleableId, defaultId);
+        return typedArray.getResourceId(styleableId, defaultId);
+    }
+
+    @Nullable
+    protected int[] getIntArrayAttrsFromRefs(int styleableId) {
+        int[] result = null;
+
+        int defaultId = getResourceId(styleableId);
 
         if(defaultId != 0) {
             result = getResources().getIntArray(defaultId);
@@ -79,19 +81,14 @@ public abstract class BaseView<T extends ViewInfo> extends View {
         return result;
     }
 
-    protected Drawable getDrawableFromRefs(int styleableId) {
-        Drawable result = null;
+    @Nullable
+    protected String[] getStringArrayFromRefs(int styleableId) {
+        String[] result = null;
 
-        if(typedArray == null) {
-            Log.e(TAG, "TypedArray is null");
-            return null;
-        }
-
-        int defaultId = 0;
-        defaultId = typedArray.getResourceId(styleableId, defaultId);
+        int defaultId = getResourceId(styleableId);
 
         if(defaultId != 0) {
-            result = AppCompatResources.getDrawable(getContext(), defaultId);
+            result = getResources().getStringArray(defaultId);
         }
 
         return result;

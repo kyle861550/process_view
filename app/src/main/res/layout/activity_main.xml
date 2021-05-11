@@ -33,6 +33,7 @@
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            app:texts="@array/texts"
             app:angle="20"
             app:bolder_width="2.5"
             app:between_space="10"
@@ -42,6 +43,7 @@
             app:block_selected_color="#F85F05"
             app:block_selected_colors="@array/selected_colors"
             app:block_unselected_color="#00000000"
+            app:arrow_type="FULL_ARROW_END"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

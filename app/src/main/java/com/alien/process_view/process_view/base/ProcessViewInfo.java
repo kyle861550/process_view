@@ -1,4 +1,4 @@
-package com.alien.process_view.process_view;
+package com.alien.process_view.process_view.base;
 
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -9,6 +9,7 @@ import com.alien.process_view.base.ViewInfo;
 public class ProcessViewInfo implements ViewInfo {
 
     public static final class ViewAttr {
+        public String[] texts;
         private ProcessViewInfo viewInfo;
 
         public int usefulWidth;

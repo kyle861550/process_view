@@ -10,4 +10,10 @@
         <item>@android:color/holo_purple</item>
         <item>@android:color/holo_red_light</item>
     </integer-array>
+
+    <string-array name="texts">
+        <item>"Hello"</item>
+        <item>"World"</item>
+        <item>"! :D"</item>
+    </string-array>
 </resources>
