@@ -48,9 +48,35 @@ public class ProcessViewInfo implements ViewInfo {
             return shader;
         }
 
+        private void fixWeightCountToFitBlockCount() {
+            if(blockPercent.length == blockCount) {
+                return;
+            }
+
+            int[] fixBlockPercent = new int[blockCount];
+
+            System.arraycopy(blockPercent,
+                    0,
+                    fixBlockPercent,
+                    0,
+                    Math.min(blockPercent.length, blockCount));
+
+            blockPercent = fixBlockPercent;
+
+            for(int i = 0; i < blockPercent.length; i++) {
+                if(blockPercent[i] == 0) {
+                    blockPercent[i] = 1;
+                }
+            }
+
+        }
+
         // 計算總分配
-        private int getTotalPercent() {
+        private int getTotalPercentWeight() {
             int total = 0;
+
+            fixWeightCountToFitBlockCount();
+
             for(int item : blockPercent) {
                 total += item;
             }
@@ -62,11 +88,12 @@ public class ProcessViewInfo implements ViewInfo {
                 blockPercent = new int[1];
             }
 
-            int[] result = new int[blockPercent.length];
+            int[] result = new int[blockCount];
+            int totalPercentWeight = getTotalPercentWeight();
 
-            int everyBlockWidth = usefulWidth / getTotalPercent();
+            int everyBlockWidth = usefulWidth / totalPercentWeight;
 
-            for(int i = 0; i < blockPercent.length; i++) {
+            for(int i = 0; i < blockCount; i++) {
                 result[i] = blockPercent[i] * everyBlockWidth;
             }
 

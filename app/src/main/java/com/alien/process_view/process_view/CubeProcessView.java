@@ -69,7 +69,6 @@ public class CubeProcessView extends ProcessView {
             canvas.drawPath(path, blockPaint);
         }
 
-        // 把顏色設定回原來的顏色
         blockPaint.setColor(viewAttr.blockSelectedColor);
     }
 
@@ -94,17 +93,41 @@ public class CubeProcessView extends ProcessView {
         return 3;
     }
 
+    public int getCount() {
+        //TODO: NPE: 尚未建立 viewAttr 物件
+//        return viewAttr.blockCount;
+        return 3;
+    }
+
+    private int checkValue(int value) {
+        int result = value;
+
+        if(value < 0) {
+            result = 0;
+        } else if(value > viewAttr.blockCount) {
+            result = viewAttr.blockCount;
+        }
+
+        return result;
+    }
+
     @MainThread
     public void setProgress(int value) {
-        if(value < 0) {
-            value = 0;
-        } else if(value > viewAttr.blockCount) {
-            value = viewAttr.blockCount;
-        }
+        value = checkValue(value);
 
         viewAttr.blockProgress = value;
 
-        postInvalidate();
+        invalidate();
+    }
+
+    public void setCount(int value) {
+        if(value < 0) {
+            value = 0;
+        }
+
+        viewAttr.blockCount = value;
+
+        invalidate();
     }
 
 }

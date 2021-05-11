@@ -13,6 +13,22 @@
         tools:context=".MainActivity"
         android:background="@color/black">
 
+        <Button
+            android:id="@+id/add_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add_Count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/reduce_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reduce_Count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <com.alien.process_view.process_view.CubeProcessView
             android:id="@+id/progress"
             android:layout_width="match_parent"

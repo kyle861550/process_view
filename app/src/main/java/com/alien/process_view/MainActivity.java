@@ -9,7 +9,7 @@ import com.alien.process_view.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int value;
+    private int value, count;
     private ActivityMainBinding binding;
 
     @Override
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         value = binding.progress.getProgress();
+        count = binding.progress.getCount();
     }
 
     private void initEvent() {
@@ -32,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.reduce.setOnClickListener(v ->
                 binding.progress.setProgress(--value));
+
+        binding.addCount.setOnClickListener(v ->
+                binding.progress.setCount(++count));
+
+        binding.reduceCount.setOnClickListener(v ->
+                binding.progress.setCount(--count));
     }
 
 
