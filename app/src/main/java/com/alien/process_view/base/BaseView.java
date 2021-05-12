@@ -113,15 +113,18 @@ public abstract class BaseView<T extends ViewInfo> extends View {
         return totalHeight - paddingBottom - paddingTop;
     }
 
-    protected float textCenterY(Paint paint, float baseLine) {
-        float result = baseLine;
+    protected float textHeight(Paint paint) {
+        float offset;
 
         Paint.FontMetrics fm = paint.getFontMetrics();
 
-        float offset = (fm.descent + fm.ascent) / 2;
-        result = result - offset;
+        offset = (fm.descent + fm.ascent) / 2;
 
-        return result;
+        return offset;
+    }
+
+    protected float textCenterY(Paint paint, float baseLine) {
+        return baseLine - textHeight(paint);
     }
 
     @Override

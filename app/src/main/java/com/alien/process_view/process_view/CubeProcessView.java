@@ -109,8 +109,11 @@ public class CubeProcessView extends ProcessView {
             y = textCenterY(textPaint, y);
 
             implDrawText(textPaint, text, x, y, rectF.right - rectF.left);
-//            canvas.drawText(text, x, y, textPaint);
         }
+
+    }
+
+    private void preFixWord() {
 
     }
 
@@ -118,10 +121,26 @@ public class CubeProcessView extends ProcessView {
         float width = paint.measureText(text);
 
         if(width > maxWidth) {
-            // TODO: 換行
+            // TODO: 等待整理
+            int paintCount = paint.breakText(text, true, maxWidth, null);
+
+            String canPrintWord = text.substring(0, paintCount);
+            String waitWord = text.substring(paintCount);
+
+            Log.i(TAG, "Over width: " + (width - maxWidth) +
+                    ", can print word: " + canPrintWord +
+                    ", waiting word: " + waitWord);
+
+            int padding = 5;
+            float height = textHeight(paint);
+
+            canvas.drawText(canPrintWord, x, y + height - padding, paint);
+
+            canvas.drawText(waitWord, x, y - height + padding, paint);
+        } else {
+            canvas.drawText(text, x, y, paint);
         }
 
-        canvas.drawText(text, x, y, paint);
     }
 
 
