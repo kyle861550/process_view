@@ -66,18 +66,20 @@ public class CubeProcessView extends ProcessView {
 
         for(int i = 0; i < pathResult.length; i++) {
             Path path = pathResult[i];
+            int targetColor = viewAttr.blockSelectedColor;
 
             if(i > viewAttr.blockProgress - 1) {
                 // 未被選擇區塊的顏色
-                blockPaint.setColor(viewAttr.blockUnselectedColor);
+                targetColor = viewAttr.blockUnselectedColor;
 
                 Log.d(TAG, "Unselected block index: " + (i + 1));
             }
 
+            blockPaint.setColor(targetColor);
+
             canvas.drawPath(path, blockPaint);
         }
 
-        blockPaint.setColor(viewAttr.blockSelectedColor);
     }
 
     private void drawBold() {
@@ -100,18 +102,28 @@ public class CubeProcessView extends ProcessView {
 
         for(int i = 0; i < blockCount; i++) {
             RectF rectF = textSpace[i];
-            String context = texts[i];
+            String text = texts[i];
 
             float x = (rectF.left + rectF.right) / 2;
             float y =  rectF.bottom / 2;
-
             y = textCenterY(textPaint, y);
 
-            // TODO: 文字開始的 x, y 需要計算
-            canvas.drawText(context, x, y, textPaint);
+            implDrawText(textPaint, text, x, y, rectF.right - rectF.left);
+//            canvas.drawText(text, x, y, textPaint);
         }
 
     }
+
+    private void implDrawText(Paint paint, String text, float x, float y, float maxWidth) {
+        float width = paint.measureText(text);
+
+        if(width > maxWidth) {
+            // TODO: 換行
+        }
+
+        canvas.drawText(text, x, y, paint);
+    }
+
 
 /// TODO: 操作方法 ( 抽出
     public int getProgress() {

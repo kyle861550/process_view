@@ -77,7 +77,9 @@ public class ProcessViewInfo implements ViewInfo {
             }
             String[] result = new String[blockCount];
 
-            System.arraycopy(strings, 0, result, 0, strings.length);
+            int copyCount = Math.min(strings.length, blockCount);
+
+            System.arraycopy(strings, 0, result, 0, copyCount);
 
             for(int i = 0; i < result.length; i++) {
                 if(result[i] == null) {
