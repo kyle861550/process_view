@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.alien.process_view.base.PathInfo;
+import com.alien.process_view.base.TextSpaceInfo;
 import com.alien.process_view.process_view.path.BaseArrowPath;
 
 public class FullArrow extends BaseArrowPath {
@@ -94,7 +95,7 @@ public class FullArrow extends BaseArrowPath {
     }
 
     @Override
-    protected Path[] getArrowPath(@NonNull Path[] results) {
+    protected Path[] getArrowPath(@NonNull Path[] results, TextSpaceInfo[] textSpaceInfo) {
 
         for(int i = 0; i < results.length; i++) {
             curPath = new Path();

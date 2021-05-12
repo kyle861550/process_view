@@ -1,5 +1,6 @@
 package com.alien.process_view.process_view.base;
 
+import android.content.Context;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
@@ -9,8 +10,7 @@ import com.alien.process_view.base.ViewInfo;
 public class ProcessViewInfo implements ViewInfo {
 
     public static final class ViewAttr {
-        private ProcessViewInfo viewInfo;
-
+        public int usefulHeight;
         public int usefulWidth;
 
         public int blockCount, blockProgress, betweenSpace;
@@ -35,13 +35,13 @@ public class ProcessViewInfo implements ViewInfo {
                 return shader;
             }
 
-            int middlePointX = viewInfo.usefulWidth / 2;
+            int middlePointX = usefulWidth / 2;
 
             shader = new LinearGradient(
                     middlePointX,
                     0,
                     middlePointX,
-                    viewInfo.usefulHeight,
+                    usefulHeight,
                     blockColors,
                     null,
                     Shader.TileMode.CLAMP
@@ -49,6 +49,43 @@ public class ProcessViewInfo implements ViewInfo {
 
 
             return shader;
+        }
+
+        /// 字串以 ref 為主 (e.g @sting/hello_world)，string 為輔
+        public String[] getTextContexts(Context context) {
+            String[] result;
+
+            int[] textRef = textsRef;
+            if(textRef != null) {
+                result = new String[textRef.length];
+
+                for(int i = 0; i < textRef.length; i++) {
+                    result[i] = context.getString(textRef[i]);
+                }
+            } else {
+                result = textsString;
+            }
+
+            result = textCountFitBlockCount(result);
+
+            return result;
+        }
+
+        private String[] textCountFitBlockCount(String[] strings) {
+            if(strings == null || strings.length == blockCount) {
+                return strings;
+            }
+            String[] result = new String[blockCount];
+
+            System.arraycopy(strings, 0, result, 0, strings.length);
+
+            for(int i = 0; i < result.length; i++) {
+                if(result[i] == null) {
+                    result[i] = "";
+                }
+            }
+
+            return result;
         }
 
         private void fixWeightCountToFitBlockCount() {
@@ -130,11 +167,10 @@ public class ProcessViewInfo implements ViewInfo {
 
     @Override
     public void setUsefulSpace(int width, int height) {
-        viewAttr.viewInfo = this;
         drawTools.viewInfo = this;
 
         usefulWidth = viewAttr.usefulWidth = width;
-        usefulHeight = height;
+        usefulHeight = viewAttr.usefulHeight = height;
     }
 
 }

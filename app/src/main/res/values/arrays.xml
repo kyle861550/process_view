@@ -12,8 +12,9 @@
     </integer-array>
 
     <string-array name="texts_string">
-        <item>"Hello"</item>
+        <item>"Hello \n :O"</item>
         <item>"World"</item>
-        <item>"! :D"</item>
+        <item>"!"</item>
+        <item>":D"</item>
     </string-array>
 </resources>

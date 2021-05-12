@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class CubeProcessView extends ProcessView {
     private Canvas canvas;
 
     private Path[] pathResult;
+    private RectF[] textSpace;
 
     public CubeProcessView(Context context) {
         super(context);
@@ -49,6 +51,7 @@ public class CubeProcessView extends ProcessView {
         blockPath = blockPath == null ? getArrowBlockPath() : blockPath;
 
         pathResult = blockPath.getArrowPath(viewInfo);
+        textSpace = blockPath.getTextSpace(viewInfo);
 
         drawBlock();
 
@@ -88,15 +91,24 @@ public class CubeProcessView extends ProcessView {
 
     private void drawText() {
         Paint textPaint = drawTools.textPaint;
+        int blockCount = viewAttr.blockCount;
 
-//        String[] texts = viewAttr.texts;
-//        if(texts == null) {
-//            return;
-//        }
-//
-//        RectF r = new RectF();
-//
-//        canvas.drawText();
+        String[] texts = viewAttr.getTextContexts(getContext());
+        if(texts == null) {
+            return;
+        }
+
+        for(int i = 0; i < blockCount; i++) {
+            RectF rectF = textSpace[i];
+            String context = texts[i];
+
+            float x = (rectF.left + rectF.right) / 2;
+            float y =  rectF.bottom / 2;
+
+            // TODO: 文字開始的 x, y 需要計算
+            canvas.drawText(context, x, y, textPaint);
+        }
+
 
     }
 

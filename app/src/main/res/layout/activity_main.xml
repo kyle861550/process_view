@@ -17,7 +17,7 @@
             android:id="@+id/add_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add_Count"
+            android:text="@string/add_count"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/reduce_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reduce_Count"
+            android:text="@string/reduce_count"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -33,7 +33,7 @@
             android:id="@+id/change_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Type"
+            android:text="@string/type"
             app:layout_constraintTop_toBottomOf="@id/reduce_count"
             app:layout_constraintBottom_toTopOf="@id/progress"/>
 
@@ -46,12 +46,14 @@
             app:bolder_width="2.5"
             app:between_space="10"
             app:block_count="4"
-            app:block_progress="2"
+            app:block_progress="3"
             app:block_percent="@array/counts"
             app:block_selected_color="#F85F05"
             app:block_selected_colors="@array/selected_colors"
             app:block_unselected_color="#00000000"
             app:arrow_type="FULL_ARROW_END"
+            app:text_align="CENTER"
+            app:text_size_sp="16"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +73,7 @@
             android:id="@+id/reduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reduce"
+            android:text="@string/reduce"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -79,7 +81,7 @@
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="@string/add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

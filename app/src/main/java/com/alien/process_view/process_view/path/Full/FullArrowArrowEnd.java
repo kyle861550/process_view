@@ -1,12 +1,12 @@
 package com.alien.process_view.process_view.path.Full;
 
 import android.graphics.Path;
-import android.graphics.RectF;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.alien.process_view.base.PathInfo;
+import com.alien.process_view.base.TextSpaceInfo;
 import com.alien.process_view.process_view.path.BaseArrowPath;
 
 /**
@@ -25,9 +25,10 @@ public class FullArrowArrowEnd extends BaseArrowPath {
     private PathInfo nextStartPoint = new PathInfo();
     private PathInfo nextEndPoint = new PathInfo();
 
-    private float arrowPointX;
-    private float arrowPointY;
+    private PathInfo curArrowPoint = new PathInfo();
     private PathInfo nextArrowPoint = new PathInfo();
+
+    private TextSpaceInfo curTextSpaceInfo;
 
     private boolean isLastBlock() {
         return curIndex == viewAttr.blockCount - 1;
@@ -42,6 +43,8 @@ public class FullArrowArrowEnd extends BaseArrowPath {
         curPathInfo = new PathInfo(x, y);
 
         curStartPoint = new PathInfo(curPathInfo);
+
+        curTextSpaceInfo = new TextSpaceInfo(x, 0);
     }
 
     private void calcX2() {
@@ -59,6 +62,8 @@ public class FullArrowArrowEnd extends BaseArrowPath {
 
         nextStartPoint = new PathInfo(curPathInfo,
                 viewAttr.betweenSpace);
+
+        curTextSpaceInfo.endX = x;    // end x point (文字可輸入的範圍)
     }
 
     private void calcX3() {
@@ -73,8 +78,7 @@ public class FullArrowArrowEnd extends BaseArrowPath {
 
         curPathInfo = new PathInfo(x, y);
 
-        arrowPointX = x;
-        arrowPointY = y;
+        curArrowPoint = new PathInfo(x, y);
     }
 
     private void calcX4() {
@@ -103,24 +107,25 @@ public class FullArrowArrowEnd extends BaseArrowPath {
         if(curIndex != 0) {
             x = nextArrowPoint.x;
             y = nextArrowPoint.y;
+            curPath.lineTo(x, y);
+
+            curTextSpaceInfo.startX = x;    // start x point (文字可輸入的範圍)
         }
-        curPath.lineTo(x, y);
 
         // TODO: 其他類型的也要修正掉
 //        curPath.close();
         curPath.lineTo(curStartPoint.x, curStartPoint.y);
 
         nextEndPoint = new PathInfo(curPathInfo, viewAttr.betweenSpace);
-        nextArrowPoint = new PathInfo(
-                arrowPointX + viewAttr.betweenSpace,
-                arrowPointY
-        );
+
+        // 記錄箭頭的 Head 座標
+        nextArrowPoint = new PathInfo(curArrowPoint, viewAttr.betweenSpace);
 
         curPathInfo = new PathInfo(x, y);
     }
 
     @Override
-    protected Path[] getArrowPath(@NonNull Path[] results) {
+    protected Path[] getArrowPath(@NonNull Path[] results, TextSpaceInfo[] textSpaceInfo) {
 
         for(int i = 0; i < results.length; i++) {
             curIndex = i;
@@ -133,6 +138,7 @@ public class FullArrowArrowEnd extends BaseArrowPath {
             calcX5();
 
             results[i] = curPath;
+            textSpaceInfo[i] = curTextSpaceInfo;
 
             Log.d(TAG, "Make path: " + i);
         }
@@ -140,11 +146,6 @@ public class FullArrowArrowEnd extends BaseArrowPath {
         nextStartPoint = new PathInfo();
 
         return results;
-    }
-
-    @Override
-    protected RectF[] getTextSpace(@NonNull RectF[] rect) {
-        return rect;
     }
 
 }

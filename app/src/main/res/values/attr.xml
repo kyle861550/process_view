@@ -11,13 +11,20 @@
         <attr name="block_selected_colors" format="reference"/>
         <attr name="block_unselected_color" format="color"/>
 
+        <attr name="text_size_sp" format="integer"/>
         <attr name="text_color" format="color"/>
         <attr name="texts_ref" format="reference"/>
         <attr name="texts_string" format="reference"/>
+        <attr name="text_align" format="enum">
+            <enum name="LEFT" value="0x0000"/>
+            <enum name="CENTER" value="0x0001"/>
+            <enum name="RIGHT" value="0x0002"/>
+        </attr>
 
+        <!-- Haven't done -->
         <attr name="direction" format="enum">
-            <enum name="RIGHT" value="0"/>
-            <enum name="LEFT" value="1"/>
+            <enum name="VERTICAL" value="0"/>
+            <enum name="HORIZONTAL" value="1"/>
         </attr>
 
         <attr name="angle" format="float"/>

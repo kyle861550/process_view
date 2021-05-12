@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ProcessView</string>
+    <string name="add_count">Add_Count</string>
+    <string name="reduce">Reduce</string>
+    <string name="add">Add</string>
+    <string name="reduce_count">Reduce_Count</string>
+    <string name="type">Type</string>
 </resources>
