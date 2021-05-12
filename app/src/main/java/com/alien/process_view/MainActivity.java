@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.alien.process_view.databinding.ActivityMainBinding;
-import com.alien.process_view.process_view.path.ArrowTypeManager;
+import com.view.alienlib.process_view.path.ArrowTypeManager;
 
 public class MainActivity extends AppCompatActivity {
 

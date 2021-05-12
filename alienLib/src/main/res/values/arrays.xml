@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="counts">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+
+    <integer-array name="selected_colors">
+        <item>@android:color/holo_purple</item>
+        <item>@android:color/holo_red_light</item>
+    </integer-array>
+
+    <string-array name="texts_string">
+        <item>"Hello|Hi"</item>
+        <item>"World"</item>
+        <item>"!"</item>
+        <item>":D"</item>
+    </string-array>
+</resources>
