@@ -27,6 +27,7 @@ public class ProcessViewInfo implements ViewInfo {
 
         public int[] textsRef;
         public String[] textsString;
+        public float textNextWordPadding;
 
         private Shader shader;
 

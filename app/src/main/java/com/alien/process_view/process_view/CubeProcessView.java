@@ -108,7 +108,8 @@ public class CubeProcessView extends ProcessView {
             float y =  rectF.bottom / 2;
             y = textCenterY(textPaint, y);
 
-            implDrawText(textPaint, text, x, y, rectF.right - rectF.left);
+//            implDrawText(textPaint, text, x, y, rectF.right - rectF.left);
+            implDrawTextWithRule(textPaint, x, y, text);
         }
 
     }
@@ -117,7 +118,8 @@ public class CubeProcessView extends ProcessView {
 
     }
 
-    private void implDrawText(Paint paint, String text, float x, float y, float maxWidth) {
+    // TODO: 待修正
+    private void implDrawText(Paint paint, float x, float y, String text, float maxWidth) {
         float width = paint.measureText(text);
 
         if(width > maxWidth) {
@@ -131,7 +133,7 @@ public class CubeProcessView extends ProcessView {
                     ", can print word: " + canPrintWord +
                     ", waiting word: " + waitWord);
 
-            int padding = 5;
+            float padding = viewAttr.textNextWordPadding;
             float height = textHeight(paint);
 
             canvas.drawText(canPrintWord, x, y + height - padding, paint);
@@ -142,6 +144,25 @@ public class CubeProcessView extends ProcessView {
         }
 
     }
+
+    //TODO: 待優化
+    private void implDrawTextWithRule(Paint paint, float x, float y, String text) {
+        if(text.contains("|")) {
+            // SplitWord
+            String[] splitWord = text.split("\\|");
+            float padding = viewAttr.textNextWordPadding;
+            float height = textHeight(paint);
+
+            canvas.drawText(splitWord[0], x, y + height - padding, paint);
+
+            canvas.drawText(splitWord[1], x, y - height + padding, paint);
+        } else {
+            canvas.drawText(text, x, y, paint);
+        }
+
+    }
+
+
 
 
 /// TODO: 操作方法 ( 抽出

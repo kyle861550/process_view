@@ -55,6 +55,7 @@
             app:text_align="CENTER"
             app:text_size_sp="16"
             app:text_color="@color/white"
+            app:text_next_word_padding="10"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

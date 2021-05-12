@@ -41,6 +41,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     private int[] blockColors;
     private int[] blockPercent;
 
+    private float textNextWordPadding;
     private float textPxSize;
     private int textColor;
     private int[] textsRef;
@@ -108,6 +109,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
         int align = typedArray.getInt(R.styleable.process_view_text_align, Paint.Align.CENTER.ordinal());
         textAlign = Paint.Align.values()[align];
+        textNextWordPadding = typedArray.getFloat(R.styleable.process_view_text_next_word_padding, 5);
     }
 
     private void initBlockAttr(TypedArray typedArray) {
@@ -165,6 +167,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.blockColors = blockColors;
         viewAttr.textsString = textsString;
         viewAttr.textsRef = textsRef;
+        viewAttr.textNextWordPadding = textNextWordPadding;
 
         return processViewInfo;
     }

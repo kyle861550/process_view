@@ -11,6 +11,7 @@
         <attr name="block_selected_colors" format="reference"/>
         <attr name="block_unselected_color" format="color"/>
 
+        <attr name="text_next_word_padding" format="float"/>
         <attr name="text_size_sp" format="integer"/>
         <attr name="text_color" format="color"/>
         <attr name="texts_ref" format="reference"/>
