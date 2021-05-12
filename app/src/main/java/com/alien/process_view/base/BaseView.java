@@ -3,6 +3,7 @@ package com.alien.process_view.base;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -110,6 +111,17 @@ public abstract class BaseView<T extends ViewInfo> extends View {
         final int paddingBottom = getPaddingBottom();
 
         return totalHeight - paddingBottom - paddingTop;
+    }
+
+    protected float textCenterY(Paint paint, float baseLine) {
+        float result = baseLine;
+
+        Paint.FontMetrics fm = paint.getFontMetrics();
+
+        float offset = (fm.descent + fm.ascent) / 2;
+        result = result - offset;
+
+        return result;
     }
 
     @Override

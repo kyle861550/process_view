@@ -105,10 +105,11 @@ public class CubeProcessView extends ProcessView {
             float x = (rectF.left + rectF.right) / 2;
             float y =  rectF.bottom / 2;
 
+            y = textCenterY(textPaint, y);
+
             // TODO: 文字開始的 x, y 需要計算
             canvas.drawText(context, x, y, textPaint);
         }
-
 
     }
 

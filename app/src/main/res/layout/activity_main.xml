@@ -52,7 +52,7 @@
             app:block_selected_colors="@array/selected_colors"
             app:block_unselected_color="#00000000"
             app:arrow_type="FULL_ARROW_END"
-            app:text_align="CENTER"
+            app:text_align="LE"
             app:text_size_sp="16"
 
             app:layout_constraintTop_toTopOf="parent"
