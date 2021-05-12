@@ -48,7 +48,7 @@ public class CubeProcessView extends ProcessView {
 
         blockPath = blockPath == null ? getArrowBlockPath() : blockPath;
 
-        pathResult = blockPath.getPath(viewInfo);
+        pathResult = blockPath.getArrowPath(viewInfo);
 
         drawBlock();
 
@@ -89,15 +89,18 @@ public class CubeProcessView extends ProcessView {
     private void drawText() {
         Paint textPaint = drawTools.textPaint;
 
-        String[] texts = viewAttr.texts;
-        if(texts == null) {
-            return;
-        }
-
+//        String[] texts = viewAttr.texts;
+//        if(texts == null) {
+//            return;
+//        }
+//
+//        RectF r = new RectF();
+//
+//        canvas.drawText();
 
     }
 
-/// 操作方法
+/// TODO: 操作方法 ( 抽出
     public int getProgress() {
         //TODO: NPE: 尚未建立 viewAttr 物件
 //        return viewAttr.blockProgress;

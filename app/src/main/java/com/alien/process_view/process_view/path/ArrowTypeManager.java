@@ -3,6 +3,10 @@ package com.alien.process_view.process_view.path;
 import androidx.annotation.IntDef;
 
 import com.alien.process_view.process_view.base.ProcessViewInfo;
+import com.alien.process_view.process_view.path.Full.FullArrow;
+import com.alien.process_view.process_view.path.Full.FullArrowArrowEnd;
+import com.alien.process_view.process_view.path.Single.UpperArrowPathCenter;
+import com.alien.process_view.process_view.path.Single.UpperArrowPathSide;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,7 +36,7 @@ public class ArrowTypeManager {
                 break;
 
             case FULL_ARROW_END:
-                result = new FullArrowBlockEnd();
+                result = new FullArrowArrowEnd();
                 break;
 
             case UPPER_ARROW_CENTER:

@@ -11,7 +11,7 @@
         <item>@android:color/holo_red_light</item>
     </integer-array>
 
-    <string-array name="texts">
+    <string-array name="texts_string">
         <item>"Hello"</item>
         <item>"World"</item>
         <item>"! :D"</item>

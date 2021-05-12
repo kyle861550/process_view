@@ -1,28 +1,23 @@
-package com.alien.process_view.process_view.path;
+package com.alien.process_view.process_view.path.Single;
 
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.Log;
 
-import com.alien.process_view.base.PathInfo;
-import com.alien.process_view.process_view.base.ProcessViewInfo;
+import androidx.annotation.NonNull;
 
-public class UpperArrowPathSide implements BlockPath<ProcessViewInfo> {
+import com.alien.process_view.base.PathInfo;
+import com.alien.process_view.process_view.path.BaseArrowPath;
+
+public class UpperArrowPathSide extends BaseArrowPath {
 
     private static final String TAG = UpperArrowPathSide.class.getSimpleName();
-
-    private ProcessViewInfo viewInfo;
-    private ProcessViewInfo.ViewAttr viewAttr;
 
     private Path curPath;
     private PathInfo curPathInfo = new PathInfo();
 
     private PathInfo nextStartPoint = new PathInfo();
     private PathInfo nextEndPoint = new PathInfo();
-
-    private void prepareTools(ProcessViewInfo viewInfo) {
-        this.viewInfo = viewInfo;
-        this.viewAttr = viewInfo.getViewAttr();
-    }
 
     private void calcX1() {
         float x = nextStartPoint.x;
@@ -84,11 +79,7 @@ public class UpperArrowPathSide implements BlockPath<ProcessViewInfo> {
     }
 
     @Override
-    public Path[] getPath(ProcessViewInfo viewInfo) {
-
-        prepareTools(viewInfo);
-
-        Path[] results = new Path[viewAttr.blockCount];
+    protected Path[] getArrowPath(@NonNull Path[] results) {
 
         for(int i = 0; i < results.length; i++) {
             curPath = new Path();
@@ -104,6 +95,11 @@ public class UpperArrowPathSide implements BlockPath<ProcessViewInfo> {
         }
 
         return results;
+    }
+
+    @Override
+    protected RectF[] getTextSpace(@NonNull RectF[] rect) {
+        return rect;
     }
 
 }

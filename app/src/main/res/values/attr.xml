@@ -12,7 +12,8 @@
         <attr name="block_unselected_color" format="color"/>
 
         <attr name="text_color" format="color"/>
-        <attr name="texts" format="reference"/>
+        <attr name="texts_ref" format="reference"/>
+        <attr name="texts_string" format="reference"/>
 
         <attr name="direction" format="enum">
             <enum name="RIGHT" value="0"/>

@@ -37,7 +37,9 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     private int blockUnselectedColor;
     private int[] blockColors;
     private int[] blockPercent;
-    private String[] texts;
+
+    private int[] textsRef;
+    private String[] textsString;
 
     private BlockPath<ProcessViewInfo> arrowBlockPath;
 
@@ -95,7 +97,8 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         blockColors = getIntArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
         blockPercent = getIntArrayAttrsFromRefs(R.styleable.process_view_block_percent);
 
-        texts = getStringArrayFromRefs(R.styleable.process_view_texts);
+        textsRef = getIntArrayAttrsFromRefs(R.styleable.process_view_texts_ref);
+        textsString = getStringArrayFromRefs(R.styleable.process_view_texts_string);
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
 
         int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW_END);
@@ -142,7 +145,8 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.blockSelectedColor = blockSelectedColor;
         viewAttr.blockUnselectedColor = blockUnselectedColor;
         viewAttr.blockColors = blockColors;
-        viewAttr.texts = texts;
+        viewAttr.textsString = textsString;
+        viewAttr.textsRef = textsRef;
 
         return processViewInfo;
     }

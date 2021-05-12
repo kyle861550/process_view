@@ -9,7 +9,6 @@ import com.alien.process_view.base.ViewInfo;
 public class ProcessViewInfo implements ViewInfo {
 
     public static final class ViewAttr {
-        public String[] texts;
         private ProcessViewInfo viewInfo;
 
         public int usefulWidth;
@@ -25,6 +24,9 @@ public class ProcessViewInfo implements ViewInfo {
         public int blockSelectedColor;
         public int blockUnselectedColor;
         public int[] blockColors;
+
+        public int[] textsRef;
+        public String[] textsString;
 
         private Shader shader;
 

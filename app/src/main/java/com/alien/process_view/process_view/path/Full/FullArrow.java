@@ -1,20 +1,17 @@
-package com.alien.process_view.process_view.path;
+package com.alien.process_view.process_view.path.Full;
 
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.Log;
 
-import com.alien.process_view.base.PathInfo;
-import com.alien.process_view.process_view.base.ProcessViewInfo;
+import androidx.annotation.NonNull;
 
-public class FullArrow implements BlockPath<ProcessViewInfo> {
+import com.alien.process_view.base.PathInfo;
+import com.alien.process_view.process_view.path.BaseArrowPath;
+
+public class FullArrow extends BaseArrowPath {
 
     private static final String TAG = FullArrow.class.getSimpleName();
-
-    private ProcessViewInfo viewInfo;
-    private ProcessViewInfo.ViewAttr viewAttr;
-
-    private int[] blocksWidth;
-    private float unnecessaryLength;
 
     private Path curPath;
     private PathInfo curPathInfo = new PathInfo();
@@ -25,25 +22,6 @@ public class FullArrow implements BlockPath<ProcessViewInfo> {
     private float arrowPointX;
     private float arrowPointY;
     private PathInfo nextArrowPoint = new PathInfo();
-
-    private void prepareTools(ProcessViewInfo viewInfo) {
-        this.viewInfo = viewInfo;
-        this.viewAttr = viewInfo.getViewAttr();
-
-        blocksWidth = viewAttr.getBlocksWidth();
-
-        unnecessaryLength = calcLength();
-    }
-
-    private float calcLength() {
-        double height = (viewInfo.usefulHeight / 2f);
-
-        double viewAngle = Math.toRadians(viewAttr.viewAngle);
-        double tan = Math.tan(viewAngle);
-        double length = height * tan;
-
-        return (float) length;
-    }
 
     private void calcX1() {
         float x = nextStartPoint.x;
@@ -116,11 +94,7 @@ public class FullArrow implements BlockPath<ProcessViewInfo> {
     }
 
     @Override
-    public Path[] getPath(ProcessViewInfo viewInfo) {
-
-        prepareTools(viewInfo);
-
-        Path[] results = new Path[viewAttr.blockCount];
+    protected Path[] getArrowPath(@NonNull Path[] results) {
 
         for(int i = 0; i < results.length; i++) {
             curPath = new Path();
@@ -136,7 +110,14 @@ public class FullArrow implements BlockPath<ProcessViewInfo> {
             Log.d(TAG, "Make path: " + i);
         }
 
+        nextStartPoint = new PathInfo();
+
         return results;
+    }
+
+    @Override
+    protected RectF[] getTextSpace(@NonNull RectF[] rect) {
+        return rect;
     }
 
 }
