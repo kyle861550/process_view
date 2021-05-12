@@ -89,19 +89,18 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         betweenSpace = typedArray.getInt(R.styleable.process_view_between_space, 10);
         enableCycleLine = typedArray.getBoolean(R.styleable.process_view_enable_cycle_line, false);
 
-        bolderColor = typedArray.getColor(R.styleable.process_view_bolder_color, Color.YELLOW);
-        bolderWidth = typedArray.getFloat(R.styleable.process_view_bolder_width, 1.5f);
-
         int direct = typedArray.getInt(R.styleable.process_view_direction, Direction.DIRECTION_RIGHT.value);
         viewDirection = Direction.getDirection(direct);
 
-        blockCount = typedArray.getInt(R.styleable.process_view_block_count, 3);
-        blockProgress = typedArray.getInt(R.styleable.process_view_block_progress, 1);
-        blockSelectedColor = typedArray.getColor(R.styleable.process_view_block_selected_color, Color.RED);
-        blockUnselectedColor = typedArray.getColor(R.styleable.process_view_block_unselected_color, Color.GRAY);
-        blockColors = getIntArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
-        blockPercent = getIntArrayAttrsFromRefs(R.styleable.process_view_block_percent);
+        initBlockAttr(typedArray);
 
+        initTextAttr(typedArray);
+
+        int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW_END);
+        arrowBlockPath = ArrowTypeManager.getBlockPath(arrowType);
+    }
+
+    private void initTextAttr(TypedArray typedArray) {
         int textSp = typedArray.getInt(R.styleable.process_view_text_size_sp, 16);
         textPxSize = TypedValue.applyDimension(COMPLEX_UNIT_SP, textSp, Resources.getSystem().getDisplayMetrics());
         textsRef = getIntArrayAttrsFromRefs(R.styleable.process_view_texts_ref);
@@ -109,9 +108,17 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
         int align = typedArray.getInt(R.styleable.process_view_text_align, Paint.Align.CENTER.ordinal());
         textAlign = Paint.Align.values()[align];
+    }
 
-        int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW_END);
-        arrowBlockPath = ArrowTypeManager.getBlockPath(arrowType);
+    private void initBlockAttr(TypedArray typedArray) {
+        bolderColor = typedArray.getColor(R.styleable.process_view_bolder_color, Color.YELLOW);
+        bolderWidth = typedArray.getFloat(R.styleable.process_view_bolder_width, 1.5f);
+        blockCount = typedArray.getInt(R.styleable.process_view_block_count, 3);
+        blockProgress = typedArray.getInt(R.styleable.process_view_block_progress, 1);
+        blockSelectedColor = typedArray.getColor(R.styleable.process_view_block_selected_color, Color.RED);
+        blockUnselectedColor = typedArray.getColor(R.styleable.process_view_block_unselected_color, Color.GRAY);
+        blockColors = getIntArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
+        blockPercent = getIntArrayAttrsFromRefs(R.styleable.process_view_block_percent);
     }
 
     @Override
