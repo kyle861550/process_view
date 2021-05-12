@@ -1,7 +1,6 @@
 package com.alien.process_view.process_view.path.Single;
 
 import android.graphics.Path;
-import android.graphics.RectF;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -91,16 +90,12 @@ public class UpperArrowPathSide extends BaseArrowPath {
             calcX4(i);
 
             results[i] = curPath;
+            textSpaceInfo[i] = new TextSpaceInfo();     // TODO:
 
             Log.d(TAG, "Make path: " + i);
         }
 
         return results;
-    }
-
-    @Override
-    protected RectF[] getTextSpace(@NonNull RectF[] rect) {
-        return rect;
     }
 
 }
