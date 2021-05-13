@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
@@ -142,76 +141,4 @@ public abstract class BaseView<T extends ViewInfo> extends View {
     }
 
     protected abstract void implDraw(Canvas canvas, T viewInfo);
-    
-    
-// TODO: 暫時寫...要研究
-
-
-    int HINT_START = 0x0001;
-    int HINT_TOP = 0x0010;
-    int HINT_END = 0x0100;
-    int HINT_BOTTOM = 0x1000;
-
-    enum ManualSet{
-        NONE, SET_HEIGHT, SET_WIDTH, BOTH
-    }
-
-    enum MeasureType{
-        HEIGHT, WIDTH
-    }
-    
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = 300;
-        int height = 300;
-
-        switch (UserSet()){
-            default:
-            case NONE:
-                width = getViewSize(width, widthMeasureSpec, MeasureType.WIDTH);
-                height = getViewSize(height, heightMeasureSpec, MeasureType.HEIGHT);
-                break;
-
-            case SET_WIDTH:
-                height = getViewSize(height, heightMeasureSpec, MeasureType.HEIGHT);
-                break;
-
-            case SET_HEIGHT:
-                width = getViewSize(width, widthMeasureSpec, MeasureType.WIDTH);
-                break;
-
-            case BOTH:   // User Do not Set, use Preset Value
-                break;
-        }
-
-        setMeasuredDimension(width, height);
-    }
-
-    public ManualSet UserSet(){
-        if (getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT && 
-                getLayoutParams().height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            return ManualSet.BOTH;
-        } else if (getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            return ManualSet.SET_WIDTH;
-        } else if (getLayoutParams().height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            return ManualSet.SET_HEIGHT;
-        } else {
-            return ManualSet.NONE;
-        }
-    }
-    
-    public int getViewSize(int defaultSize, int measureSpec, MeasureType type){
-        int mode = MeasureSpec.getMode(measureSpec);
-        int size = MeasureSpec.getSize(measureSpec);
-
-        switch (mode){
-            default:
-            case MeasureSpec.UNSPECIFIED:
-                return defaultSize;
-
-            case MeasureSpec.AT_MOST:
-            case MeasureSpec.EXACTLY:
-                return size;
-        }
-    }
 }
