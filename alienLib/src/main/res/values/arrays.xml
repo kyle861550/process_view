@@ -17,4 +17,11 @@
         <item>"!"</item>
         <item>":D"</item>
     </string-array>
+
+    <string-array name="texts_ref">
+        <item>@string/add</item>
+        <item>@string/reduce</item>
+        <item>@string/type</item>
+    </string-array>
+
 </resources>

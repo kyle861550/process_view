@@ -95,7 +95,7 @@ public class CubeProcessView extends ProcessView {
         Paint textPaint = drawTools.textPaint;
         int blockCount = viewAttr.blockCount;
 
-        String[] texts = viewAttr.getTextContexts(getContext());
+        String[] texts = viewAttr.getTextContexts();
         if(texts == null) {
             return;
         }

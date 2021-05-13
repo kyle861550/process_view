@@ -1,6 +1,5 @@
 package com.view.alienlib.process_view.base;
 
-import android.content.Context;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
@@ -25,7 +24,6 @@ public class ProcessViewInfo implements ViewInfo {
         public int blockUnselectedColor;
         public int[] blockColors;
 
-        public int[] textsRef;
         public String[] textsString;
         public float textNextWordPadding;
 
@@ -53,21 +51,14 @@ public class ProcessViewInfo implements ViewInfo {
         }
 
         /// 字串以 ref 為主 (e.g @sting/hello_world)，string 為輔
-        public String[] getTextContexts(Context context) {
+        public String[] getTextContexts() {
             String[] result;
 
-            int[] textRef = textsRef;
-            if(textRef != null) {
-                result = new String[textRef.length];
-
-                for(int i = 0; i < textRef.length; i++) {
-                    result[i] = context.getString(textRef[i]);
-                }
-            } else {
-                result = textsString;
+            if(textsString == null) {
+                textsString = new String[1];
             }
 
-            result = textCountFitBlockCount(result);
+            result = textCountFitBlockCount(textsString);
 
             return result;
         }

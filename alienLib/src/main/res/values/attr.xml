@@ -14,8 +14,7 @@
         <attr name="text_next_word_padding" format="float"/>
         <attr name="text_size_sp" format="integer"/>
         <attr name="text_color" format="color"/>
-        <attr name="texts_ref" format="reference"/>
-        <attr name="texts_string" format="reference"/>
+        <attr name="texts" format="reference"/>
         <attr name="text_align" format="enum">
             <enum name="LEFT" value="0x0000"/>
             <enum name="CENTER" value="0x0001"/>
