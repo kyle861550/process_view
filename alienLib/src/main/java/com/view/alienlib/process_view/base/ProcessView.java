@@ -47,6 +47,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     private String[] textsString;
     private Paint.Align textAlign;
 
+    private int arrowFullFlag;
     private BlockPath<ProcessViewInfo> arrowBlockPath;
 
 /// View Tools
@@ -87,8 +88,8 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     protected void initAttrs(TypedArray typedArray) {
         viewAngle = typedArray.getFloat(R.styleable.process_view_angle, 25f);
         betweenSpace = typedArray.getInt(R.styleable.process_view_between_space, 10);
-        enableCycleLine = typedArray.getBoolean(R.styleable.process_view_enable_cycle_line, false);
 
+        enableCycleLine = typedArray.getBoolean(R.styleable.process_view_enable_cycle_line, false);
         int direct = typedArray.getInt(R.styleable.process_view_direction, Direction.DIRECTION_RIGHT.value);
         viewDirection = Direction.getDirection(direct);
 
@@ -96,8 +97,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
 
         initTextAttr(typedArray);
 
-        int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW_END);
-        arrowBlockPath = ArrowTypeManager.getBlockPath(arrowType);
+        initArrowAttr(typedArray);
     }
 
     private void initTextAttr(TypedArray typedArray) {
@@ -119,6 +119,13 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         blockUnselectedColor = typedArray.getColor(R.styleable.process_view_block_unselected_color, Color.GRAY);
         blockColors = getIntArrayAttrsFromRefs(R.styleable.process_view_block_selected_colors);
         blockPercent = getIntArrayAttrsFromRefs(R.styleable.process_view_block_percent);
+    }
+
+    private void initArrowAttr(TypedArray typedArray) {
+        arrowFullFlag = typedArray.getInt(R.styleable.process_view_arrow_full, ArrowTypeManager.END_FULL | ArrowTypeManager.START_FULL);
+
+        int arrowType = typedArray.getInt(R.styleable.process_view_arrow_type, ArrowTypeManager.FULL_ARROW);
+        arrowBlockPath = ArrowTypeManager.getBlockPath(arrowType);
     }
 
     @Override
@@ -165,6 +172,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.blockColors = blockColors;
         viewAttr.textsString = textsString;
         viewAttr.textNextWordPadding = textNextWordPadding;
+        viewAttr.arrowFullFlag = arrowFullFlag;
 
         return processViewInfo;
     }

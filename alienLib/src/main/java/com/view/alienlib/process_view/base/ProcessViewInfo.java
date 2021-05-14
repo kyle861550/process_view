@@ -26,6 +26,7 @@ public class ProcessViewInfo implements ViewInfo {
 
         public String[] textsString;
         public float textNextWordPadding;
+        public int arrowFullFlag;
 
         private Shader shader;
 

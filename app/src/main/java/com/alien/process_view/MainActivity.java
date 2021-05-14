@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.alien.process_view.databinding.ActivityMainBinding;
-import com.view.alienlib.process_view.path.ArrowTypeManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,32 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 binding.progress.setCount(--count));
 
         binding.changeType.setOnClickListener(v -> {
-            int result = 0;
-            if(type > 3) {
-                --type;
-            } else {
-                ++type;
-            }
 
-            switch (type) {
-                case 0:
-                    result = ArrowTypeManager.FULL_ARROW;
-                    break;
-
-                case 1:
-                    result = ArrowTypeManager.FULL_ARROW_END;
-                    break;
-
-                case 2:
-                    result = ArrowTypeManager.UPPER_ARROW_CENTER;
-                    break;
-
-                case 3:
-                    result = ArrowTypeManager.UPPER_ARROW_SIDE;
-                    break;
-            }
-
-            binding.progress.setArrowType(result);
+//            binding.progress.setArrowType(result);
         });
 
         binding.angleSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

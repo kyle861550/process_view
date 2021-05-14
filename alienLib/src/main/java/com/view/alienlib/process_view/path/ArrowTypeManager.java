@@ -3,10 +3,8 @@ package com.view.alienlib.process_view.path;
 import androidx.annotation.IntDef;
 
 import com.view.alienlib.process_view.base.ProcessViewInfo;
-import com.view.alienlib.process_view.path.Full.FullArrow;
-import com.view.alienlib.process_view.path.Full.FullArrowArrowEnd;
-import com.view.alienlib.process_view.path.Single.UpperArrowPathCenter;
-import com.view.alienlib.process_view.path.Single.UpperArrowPathSide;
+import com.view.alienlib.process_view.path.Full.Arrow;
+import com.view.alienlib.process_view.path.Single.SingleArrow;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,37 +12,37 @@ import java.lang.annotation.RetentionPolicy;
 public class ArrowTypeManager {
 
     public static final int FULL_ARROW = 0x0000;
-    public static final int FULL_ARROW_END = 0x0001;
-    public static final int UPPER_ARROW_CENTER = 0x0002;
-    public static final int UPPER_ARROW_SIDE = 0x0003;
+    public static final int SINGLE_ARROW = 0x0001;
 
     @IntDef({
             FULL_ARROW,
-            FULL_ARROW_END,
-            UPPER_ARROW_CENTER,
-            UPPER_ARROW_SIDE
+            SINGLE_ARROW
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface ArrowType {}
+
+    public static final int NON_FULL = 0x0000;
+    public static final int START_FULL = 0x0001;
+    public static final int END_FULL = 0x0002;
+
+    @IntDef({
+            NON_FULL,
+            START_FULL,
+            END_FULL
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ArrowFull {}
 
     public static BlockPath<ProcessViewInfo> getBlockPath(@ArrowType int type) {
         BlockPath<ProcessViewInfo> result;
 
         switch (type) {
             case FULL_ARROW:
-                result = new FullArrow();
+                result = new Arrow();
                 break;
 
-            case FULL_ARROW_END:
-                result = new FullArrowArrowEnd();
-                break;
-
-            case UPPER_ARROW_CENTER:
-                result = new UpperArrowPathCenter();
-                break;
-
-            case UPPER_ARROW_SIDE:
-                result = new UpperArrowPathSide();
+            case SINGLE_ARROW:
+                result = new SingleArrow();
                 break;
 
             default:
