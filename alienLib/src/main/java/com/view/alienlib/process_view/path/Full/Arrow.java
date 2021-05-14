@@ -23,20 +23,18 @@ public class Arrow extends BaseArrow {
 
         curPathInfo = new PathInfo(x, y);
 
+        // 紀錄下次要開始畫的點
         curStartPoint = new PathInfo(curPathInfo);
 
+        // 紀錄文字物件 - 初始化
         curTextSpaceInfo = new TextSpaceInfo(x, 0);
     }
 
     @Override
-    protected void calcX2() {
+    protected void calcX2(float triangleLen) {
         int blockWidth = blocksWidth[curIndex] * (curIndex + 1);
-        float x = blockWidth - unnecessaryLength;
+        float x = blockWidth - triangleLen;
         float y = 0;
-
-        if(isFullEnd()) {
-            x = viewAttr.usefulWidth - viewAttr.betweenSpace;
-        }
 
         curPath.lineTo(x, y);
 
@@ -53,10 +51,6 @@ public class Arrow extends BaseArrow {
         float x = blocksWidth[curIndex] * (curIndex + 1);
         float y = (viewInfo.usefulHeight / 2f);
 
-        if(isFullEnd()) {
-            x = viewAttr.usefulWidth - viewAttr.betweenSpace;
-        }
-
         curPath.lineTo(x, y);
 
         curPathInfo = new PathInfo(x, y);
@@ -65,13 +59,9 @@ public class Arrow extends BaseArrow {
     }
 
     @Override
-    protected void calcX4() {
-        float x = curPathInfo.x - unnecessaryLength;
+    protected void calcX4(float triangleLen) {
+        float x = curPathInfo.x - triangleLen;
         float y = viewInfo.usefulHeight;
-
-        if(isFullEnd()) {
-            x = viewAttr.usefulWidth - viewAttr.betweenSpace;
-        }
 
         curPath.lineTo(x, y);
 

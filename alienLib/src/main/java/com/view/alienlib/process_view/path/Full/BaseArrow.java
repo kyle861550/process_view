@@ -30,11 +30,11 @@ public abstract class BaseArrow extends BaseArrowPath {
 
     protected abstract void calcX1();
 
-    protected abstract void calcX2();
+    protected abstract void calcX2(float triangleLen);
 
     protected abstract void calcX3();
 
-    protected abstract void calcX4();
+    protected abstract void calcX4(float triangleLen);
 
     protected abstract void calcX5();
 
@@ -48,12 +48,28 @@ public abstract class BaseArrow extends BaseArrowPath {
         return curIndex == viewAttr.blockCount - 1;
     }
 
-    protected boolean isFullStart() {
-        return isFirstBlock() && (viewAttr.arrowFullFlag & ArrowTypeManager.START_FULL) > 1;
+    private boolean isFullStart() {
+        return (viewAttr.arrowFullFlag & ArrowTypeManager.START_FULL) == ArrowTypeManager.START_FULL;
     }
 
-    protected boolean isFullEnd() {
-        return isLastBlock() && (viewAttr.arrowFullFlag & ArrowTypeManager.END_FULL) > 1;
+    private boolean isFullEnd() {
+        return (viewAttr.arrowFullFlag & ArrowTypeManager.END_FULL) == ArrowTypeManager.END_FULL;
+    }
+
+    private float getTriangleLen(boolean isStartPart) {
+        float result = unnecessaryLength;
+
+        if(isStartPart) {
+            if(isFullEnd() && isLastBlock()) {
+                result = viewAttr.usefulWidth - viewAttr.betweenSpace;
+            }
+        } else {
+            if(isFullStart() && isFirstBlock()) {
+                result = viewAttr.usefulWidth - viewAttr.betweenSpace;
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -64,10 +80,13 @@ public abstract class BaseArrow extends BaseArrowPath {
             curPath = new Path();
 
             calcX1();
-            calcX2();
+            calcX2(getTriangleLen(true));
+
             calcX3();
-            calcX4();
+
+            calcX4(getTriangleLen(false));
             calcX5();
+
             calcX6();
 
             results[i] = curPath;

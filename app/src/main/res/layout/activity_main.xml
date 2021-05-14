@@ -43,7 +43,7 @@
             android:layout_height="75dp"
             app:angle="45"
             app:arrow_type="FULL_ARROW"
-            app:arrow_full="START|END"
+            app:arrow_full="NON"
             app:between_space="15"
             app:block_count="4"
             app:block_percent="@array/counts"
