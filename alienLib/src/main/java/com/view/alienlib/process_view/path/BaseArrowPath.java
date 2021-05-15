@@ -41,6 +41,14 @@ public abstract class BaseArrowPath implements BlockPath<ProcessViewInfo> {
         return (float) length;
     }
 
+    public boolean needFullStart() {
+        return (viewAttr.arrowFullFlag & ArrowTypeManager.START_FULL) == ArrowTypeManager.START_FULL;
+    }
+
+    public boolean needFullEnd() {
+        return (viewAttr.arrowFullFlag & ArrowTypeManager.END_FULL) == ArrowTypeManager.END_FULL;
+    }
+
     @Override
     public Path[] getArrowPath(ProcessViewInfo viewInfo) {
         prepareTools(viewInfo);

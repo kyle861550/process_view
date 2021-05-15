@@ -3,8 +3,8 @@ package com.view.alienlib.process_view.path;
 import androidx.annotation.IntDef;
 
 import com.view.alienlib.process_view.base.ProcessViewInfo;
-import com.view.alienlib.process_view.path.Full.Arrow;
-import com.view.alienlib.process_view.path.Single.SingleArrow;
+import com.view.alienlib.process_view.path.full.Arrow;
+import com.view.alienlib.process_view.path.single.SingleArrow;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

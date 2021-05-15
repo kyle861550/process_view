@@ -1,4 +1,4 @@
-package com.view.alienlib.process_view.path.Single;
+package com.view.alienlib.process_view.path.single;
 
 import com.view.alienlib.base.PathInfo;
 

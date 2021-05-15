@@ -1,4 +1,4 @@
-package com.view.alienlib.process_view.path.Full;
+package com.view.alienlib.process_view.path.full;
 
 import android.graphics.Path;
 import android.util.Log;
@@ -7,14 +7,13 @@ import androidx.annotation.NonNull;
 
 import com.view.alienlib.base.PathInfo;
 import com.view.alienlib.base.TextSpaceInfo;
-import com.view.alienlib.process_view.path.ArrowTypeManager;
 import com.view.alienlib.process_view.path.BaseArrowPath;
 
 public abstract class BaseArrow extends BaseArrowPath {
 
     private static final String TAG = BaseArrow.class.getSimpleName();
 
-    protected int curIndex;
+    private int curIndex;
 
     protected Path curPath;
     protected PathInfo curPathInfo = new PathInfo();
@@ -22,9 +21,6 @@ public abstract class BaseArrow extends BaseArrowPath {
 
     protected PathInfo nextStartPoint = new PathInfo();
     protected PathInfo nextEndPoint = new PathInfo();
-
-    protected PathInfo curArrowPoint = new PathInfo();
-    protected PathInfo nextArrowPoint = new PathInfo();
 
     protected TextSpaceInfo curTextSpaceInfo;
 
@@ -38,35 +34,33 @@ public abstract class BaseArrow extends BaseArrowPath {
 
     protected abstract void calcX5();
 
-    protected abstract void calcX6();
+    protected abstract void calcX6(float triangleLen);
 
-    private boolean isFirstBlock() {
+    protected boolean isFirstBlock() {
         return curIndex == 0;
     }
 
-    private boolean isLastBlock() {
+    protected boolean isLastBlock() {
         return curIndex == viewAttr.blockCount - 1;
     }
 
-    private boolean isFullStart() {
-        return (viewAttr.arrowFullFlag & ArrowTypeManager.START_FULL) == ArrowTypeManager.START_FULL;
+    protected int getCurBlockWidth() {
+        return blocksWidth[curIndex] * (curIndex + 1);
     }
 
-    private boolean isFullEnd() {
-        return (viewAttr.arrowFullFlag & ArrowTypeManager.END_FULL) == ArrowTypeManager.END_FULL;
-    }
-
-    private float getTriangleLen(boolean isStartPart) {
+    /**
+     * @param isArrowBottomTriangle 是否是箭頭的尾端三角形
+     * @return 三角形的邊
+     */
+    private float getTriangleSideLen(boolean isArrowBottomTriangle) {
         float result = unnecessaryLength;
 
-        if(isStartPart) {
-            if(isFullEnd() && isLastBlock()) {
-                result = viewAttr.usefulWidth - viewAttr.betweenSpace;
-            }
-        } else {
-            if(isFullStart() && isFirstBlock()) {
-                result = viewAttr.usefulWidth - viewAttr.betweenSpace;
-            }
+        if(!isArrowBottomTriangle && needFullEnd() && isLastBlock()) {
+            result = 0;
+        }
+
+        if(isArrowBottomTriangle && needFullStart() && isFirstBlock()) {
+            result = 0;
         }
 
         return result;
@@ -80,14 +74,14 @@ public abstract class BaseArrow extends BaseArrowPath {
             curPath = new Path();
 
             calcX1();
-            calcX2(getTriangleLen(true));
+            calcX2(getTriangleSideLen(false));
 
             calcX3();
 
-            calcX4(getTriangleLen(false));
+            calcX4(getTriangleSideLen(false));
             calcX5();
 
-            calcX6();
+            calcX6(getTriangleSideLen(true));
 
             results[i] = curPath;
             textSpaceInfo[i] = curTextSpaceInfo;

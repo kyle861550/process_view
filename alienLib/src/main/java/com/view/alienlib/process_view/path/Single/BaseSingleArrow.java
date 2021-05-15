@@ -1,4 +1,4 @@
-package com.view.alienlib.process_view.path.Single;
+package com.view.alienlib.process_view.path.single;
 
 import android.graphics.Path;
 import android.util.Log;
