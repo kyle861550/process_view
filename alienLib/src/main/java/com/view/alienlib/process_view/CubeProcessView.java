@@ -2,9 +2,11 @@ package com.view.alienlib.process_view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -63,19 +65,22 @@ public class CubeProcessView extends ProcessView {
 
     private void drawBlock() {
         Paint blockPaint = drawTools.blockPaint;
-        blockPaint.setShader(viewAttr.getShader());
+        Shader shader = viewAttr.getShader();
 
         for(int i = 0; i < pathResult.length; i++) {
             Path path = pathResult[i];
             int targetColor = viewAttr.blockSelectedColor;
+            Shader targetShader = shader;
 
             if(i > viewAttr.blockProgress - 1) {
                 // 未被選擇區塊的顏色
+                targetShader = null;
                 targetColor = viewAttr.blockUnselectedColor;
 
-                Log.d(TAG, "Unselected block index: " + (i + 1));
+                Log.d(TAG, "Unselected block index: " + (i + 1) + ", color: " + Integer.toHexString(targetColor));
             }
 
+            blockPaint.setShader(targetShader);
             blockPaint.setColor(targetColor);
 
             canvas.drawPath(path, blockPaint);

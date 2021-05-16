@@ -49,7 +49,7 @@
             app:block_progress="2"
             app:block_selected_color="#F85F05"
             app:block_selected_colors="@array/selected_colors"
-            app:block_unselected_color="@color/black"
+            app:block_unselected_color="@color/white"
             app:bolder_width_dp="1.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
