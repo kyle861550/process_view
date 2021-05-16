@@ -56,6 +56,11 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
 /// View Tools
     private Paint bolderPaint, blockPaint, textPaint;
 
+/// Total view info
+    protected ProcessViewInfo viewInfo;
+    protected ProcessViewInfo.DrawTools drawTools;
+    protected ProcessViewInfo.ViewAttr viewAttr;
+
     public ProcessView(Context context) {
         super(context);
     }
@@ -166,14 +171,16 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
 
     @Override
     protected ProcessViewInfo initViewInfo() {
-        ProcessViewInfo processViewInfo = new ProcessViewInfo();
+        viewInfo = new ProcessViewInfo();
+        drawTools = viewInfo.getDrawTools();
+        viewAttr = viewInfo.getViewAttr();
 
-        ProcessViewInfo.DrawTools drawTools = processViewInfo.getDrawTools();
+        ProcessViewInfo.DrawTools drawTools = viewInfo.getDrawTools();
         drawTools.bolderPaint = bolderPaint;
         drawTools.blockPaint = blockPaint;
         drawTools.textPaint = textPaint;
 
-        ProcessViewInfo.ViewAttr viewAttr = processViewInfo.getViewAttr();
+        ProcessViewInfo.ViewAttr viewAttr = viewInfo.getViewAttr();
         viewAttr.blockCount = blockCount;
         viewAttr.blockProgress = blockProgress;
         viewAttr.betweenSpace = betweenSpace;
@@ -191,7 +198,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         viewAttr.textAutoZoomOut = textAutoZoomOut;
         viewAttr.arrowFullFlag = arrowFullFlag;
 
-        return processViewInfo;
+        return viewInfo;
     }
 
     @Override

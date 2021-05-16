@@ -26,9 +26,6 @@ public class CubeProcessView extends ProcessView {
     private static final String TAG = CubeProcessView.class.getSimpleName();
     private BlockPath<ProcessViewInfo> blockPath;
 
-    private ProcessViewInfo.DrawTools drawTools;
-    private ProcessViewInfo.ViewAttr viewAttr;
-
     private Canvas canvas;
 
     private Path[] pathResult;
@@ -49,10 +46,8 @@ public class CubeProcessView extends ProcessView {
     }
 
     @Override
-    protected void implDraw(Canvas canvas, ProcessViewInfo viewInfo) {
+    protected void implDraw(Canvas canvas) {
         this.canvas = canvas;
-        this.drawTools = viewInfo.getDrawTools();
-        this.viewAttr = viewInfo.getViewAttr();
 
         blockPath = blockPath == null ? getArrowBlockPath() : blockPath;
 
@@ -121,15 +116,11 @@ public class CubeProcessView extends ProcessView {
 
 /// TODO: 操作方法 ( 抽出
     public int getProgress() {
-        //TODO: NPE: 尚未建立 viewAttr 物件
-//        return viewAttr.blockProgress;
-        return 3;
+        return viewAttr.blockProgress;
     }
 
     public int getCount() {
-        //TODO: NPE: 尚未建立 viewAttr 物件
-//        return viewAttr.blockCount;
-        return 3;
+        return viewAttr.blockCount;
     }
 
     private int checkValue(int value) {

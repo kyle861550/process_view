@@ -8,7 +8,7 @@
 
     <integer-array name="selected_colors">
         <item>@android:color/holo_purple</item>
-        <item>@android:color/tertiary_text_dark</item>
+        <item>@android:color/white</item>
         <item>@android:color/holo_orange_dark</item>
         <item>@android:color/holo_red_light</item>
     </integer-array>

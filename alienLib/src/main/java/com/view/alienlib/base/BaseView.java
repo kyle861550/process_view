@@ -129,12 +129,8 @@ public abstract class BaseView<T extends ViewInfo> extends View {
 
         viewInfo.setUsefulSpace(usefulWidth, usefulHeight);
 
-        if(viewInfo == null) {
-            throw new NullPointerException("ViewInfo is null, cannot draw view.");
-        }
-
-        implDraw(canvas, viewInfo);
+        implDraw(canvas);
     }
 
-    protected abstract void implDraw(Canvas canvas, T viewInfo);
+    protected abstract void implDraw(Canvas canvas);
 }
