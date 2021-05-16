@@ -44,6 +44,7 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
 
     private float textPaddingTopBottomDp;
     private float textPxSize;
+    private float textMinPxSize;
     private int textColor;
     private boolean textAutoZoomOut;
     private String textSplitKey;
@@ -116,8 +117,12 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
     }
 
     private void initTextAttr(TypedArray typedArray) {
-        int textSp = typedArray.getInt(R.styleable.process_view_text_size_sp, 16);
+        float textSp = typedArray.getFloat(R.styleable.process_view_text_size_sp, 16);
         textPxSize = TypedValue.applyDimension(COMPLEX_UNIT_SP, textSp, Resources.getSystem().getDisplayMetrics());
+
+        float textMinSp = typedArray.getFloat(R.styleable.process_view_text_min_size_sp, 1);
+        textMinPxSize = TypedValue.applyDimension(COMPLEX_UNIT_SP, textMinSp, Resources.getSystem().getDisplayMetrics());
+
         textsString = getStringArrayFromRefs(R.styleable.process_view_texts);
         textColor = typedArray.getColor(R.styleable.process_view_text_color, Color.BLACK);
         int align = typedArray.getInt(R.styleable.process_view_text_align, Paint.Align.CENTER.ordinal());
@@ -183,20 +188,24 @@ public abstract class ProcessView extends BaseView<ProcessViewInfo> {
         ProcessViewInfo.ViewAttr viewAttr = viewInfo.getViewAttr();
         viewAttr.blockCount = blockCount;
         viewAttr.blockProgress = blockProgress;
-        viewAttr.betweenSpace = betweenSpace;
-        viewAttr.viewAngle = viewAngle;
-        viewAttr.viewDirection = viewDirection;
-        viewAttr.enableCycleLine = enableCycleLine;
-        viewAttr.textColor = textColor;
         viewAttr.blockPercent = blockPercent;
         viewAttr.blockSelectedColor = blockSelectedColor;
         viewAttr.blockUnselectedColor = blockUnselectedColor;
         viewAttr.blockColors = blockColors;
+
+        viewAttr.betweenSpace = betweenSpace;
+        viewAttr.viewAngle = viewAngle;
+        viewAttr.viewDirection = viewDirection;
+        viewAttr.enableCycleLine = enableCycleLine;
+        viewAttr.arrowFullFlag = arrowFullFlag;
+
+        viewAttr.textColor = textColor;
         viewAttr.textsString = textsString;
         viewAttr.textPaddingTopBottomDp = textPaddingTopBottomDp;
         viewAttr.textSplitKey = textSplitKey;
         viewAttr.textAutoZoomOut = textAutoZoomOut;
-        viewAttr.arrowFullFlag = arrowFullFlag;
+        viewAttr.textPxSize = textPxSize;
+        viewAttr.textMinPxSize = textMinPxSize;
 
         return viewInfo;
     }

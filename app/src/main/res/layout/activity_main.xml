@@ -45,7 +45,7 @@
             app:arrow_type="FULL_ARROW"
             app:arrow_full="NON|START"
             app:between_space="15"
-            app:block_count="3"
+            app:block_count="4"
             app:block_progress="2"
             app:block_selected_color="#F85F05"
             app:block_selected_colors="@array/selected_colors"
@@ -59,10 +59,12 @@
 
             app:text_align="CENTER"
             app:text_color="@color/black"
-            app:text_padding_top_bottom_dp="1.5"
-            app:text_size_sp="16"
+            app:text_padding_top_bottom_dp="0"
+            app:text_size_sp="18"
+            app:text_min_size_sp="8"
+            app:text_auto_zoom_out="true"
             app:text_split_key="SPLIT_KEY_4"
-            app:texts="@array/texts_ref" />
+            app:texts="@array/texts_string" />
 
         <SeekBar
             android:id="@+id/angle_seek_bar"

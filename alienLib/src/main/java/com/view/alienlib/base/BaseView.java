@@ -112,16 +112,6 @@ public abstract class BaseView<T extends ViewInfo> extends View {
         return totalHeight - paddingBottom - paddingTop;
     }
 
-    protected float getTextHeight(Paint paint) {
-        float offset;
-
-        Paint.FontMetrics fm = paint.getFontMetrics();
-
-        offset = (fm.top + fm.bottom);
-
-        return Math.abs(offset);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         int usefulWidth = getUsefulWidth();

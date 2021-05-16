@@ -103,9 +103,11 @@ public class CubeProcessView extends ProcessView {
         TextInfo[] textInfo;
 
         try {
-            textInfo = blockText.getTextSpaceInfo(viewAttr, getTextHeight(textPaint), textSpace);
+            textInfo = blockText.getTextSpaceInfo(viewAttr, textSpace);
 
             for(TextInfo info : textInfo) {
+                textPaint.setTextSize(info.textSize);
+
                 canvas.drawText(
                         info.context,
                         info.startX,

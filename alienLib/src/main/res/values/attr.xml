@@ -12,8 +12,9 @@
         <attr name="block_unselected_color" format="color"/>
 
         <attr name="text_padding_top_bottom_dp" format="float"/>
-        <attr name="text_size_sp" format="integer"/>
+        <attr name="text_size_sp" format="float"/>
         <attr name="text_auto_zoom_out" format="boolean"/>
+        <attr name="text_min_size_sp" format="float"/>
         <attr name="text_color" format="color"/>
         <attr name="texts" format="reference"/>
         <attr name="text_split_key" format="enum">

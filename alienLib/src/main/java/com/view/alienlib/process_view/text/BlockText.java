@@ -7,6 +7,6 @@ import com.view.alienlib.process_view.base.ProcessViewInfo;
 
 public interface BlockText {
 
-    TextInfo[] getTextSpaceInfo(ProcessViewInfo.ViewAttr viewAttr, float textHeight, RectF[] rectFS) throws TextProcessException;
+    TextInfo[] getTextSpaceInfo(ProcessViewInfo.ViewAttr viewAttr, RectF[] rectFS) throws TextProcessException;
 
 }

@@ -1,18 +1,33 @@
 package com.view.alienlib.process_view.text;
 
+import android.content.res.Resources;
+import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.TypedValue;
 
 import com.view.alienlib.base.TextInfo;
+import com.view.alienlib.base.ViewTools;
 import com.view.alienlib.process_view.base.ProcessViewInfo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class TextWithRule implements BlockText {
 
-    private static final List<TextInfo> result = new ArrayList<>(10);
+    private static final List<TextInfo> result = new LinkedList<>();
+    private static final Paint textSizePaint = new Paint();
 
     private ProcessViewInfo.ViewAttr viewAttr;
+
+    private final float oneSpUnit;
+
+    private float finalTextSize;
+
+    public TextWithRule() {
+        oneSpUnit = TypedValue.applyDimension(COMPLEX_UNIT_SP, 1, Resources.getSystem().getDisplayMetrics());
+    }
 
     private String[] preCheck() throws TextProcessException {
         if(result.size() != 0) {
@@ -27,16 +42,25 @@ public class TextWithRule implements BlockText {
         return texts;
     }
 
-    private float calcStartY(RectF rectF, float textHeight, int count) {
-        float result;
+    private float calcTopYAndAdjustTextSize(RectF rectF, float textHeight, int wordCount) {
+        float textMinPxSize = viewAttr.getTextMinPxSize();
+        finalTextSize = textHeight;
+
+        if(textHeight < textMinPxSize) {
+            return 1;
+        }
 
         float totalHeight = rectF.bottom - rectF.top;
 
-        result = (totalHeight - (count * textHeight)) / 2;
+        float result = (totalHeight - (wordCount * textHeight)) / 2;
 
-        if(result < 0) {
-            // TODO:  change text size
-            result = 0;
+        if(result <= 0) {
+
+            if(viewAttr.textAutoZoomOut) {
+                result = calcTopYAndAdjustTextSize(rectF, textHeight - oneSpUnit, wordCount);
+            } else {
+                result = 0;
+            }
         }
 
         return result;
@@ -54,26 +78,36 @@ public class TextWithRule implements BlockText {
 
         String[] words = text.split(textSplitKey);
 
-        float startY = calcStartY(rectF, textHeight, words.length);
+        float startY = calcTopYAndAdjustTextSize(rectF, textHeight, words.length);
 
         for(int i = 0; i < words.length; i++) {
             TextInfo textInfo = new TextInfo();
 
+            textInfo.textSize = finalTextSize;
             textInfo.context = words[i];
             textInfo.startX = startX;
-            textInfo.startY = startY + ((i + 1) * textHeight) - viewAttr.textPaddingTopBottomDp;
+            textInfo.startY = startY + ((i + 1) * textHeight) - viewAttr.textPaddingTopBottomDp;  // Reduce one padding
 
             result.add(textInfo);
         }
 
     }
 
+    private float getTextHeight(float size) {
+        textSizePaint.setTextSize(size);
+
+        return ViewTools.getTextHeight(textSizePaint);
+    }
+
     @Override
-    public TextInfo[] getTextSpaceInfo(ProcessViewInfo.ViewAttr viewAttr, float textHeight, RectF[] rectFS) throws TextProcessException {
+    public TextInfo[] getTextSpaceInfo(ProcessViewInfo.ViewAttr viewAttr, RectF[] rectFS) throws TextProcessException {
         this.viewAttr = viewAttr;
 
         String[] texts = preCheck();
 
+        float textHeight = getTextHeight(viewAttr.textPxSize);
+
+        // Add text padding, must add top and bottom part
         textHeight += (viewAttr.textPaddingTopBottomDp * 2);
 
         int length = rectFS.length;

@@ -29,6 +29,8 @@ public class ProcessViewInfo implements ViewInfo {
         public int textColor;
         public boolean textAutoZoomOut;
         public String textSplitKey;
+        public float textPxSize;
+        public float textMinPxSize;
 
         private Shader shader;
 
@@ -51,6 +53,10 @@ public class ProcessViewInfo implements ViewInfo {
 
 
             return shader;
+        }
+
+        public float getTextMinPxSize() {
+            return textMinPxSize <= 0 ? 1 : textMinPxSize;
         }
 
         /// 字串以 ref 為主 (e.g @sting/hello_world)，string 為輔

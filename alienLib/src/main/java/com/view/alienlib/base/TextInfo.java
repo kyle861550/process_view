@@ -7,4 +7,6 @@ public class TextInfo {
     public float startX;
     public float startY;
 
+    public float textSize;
+
 }
