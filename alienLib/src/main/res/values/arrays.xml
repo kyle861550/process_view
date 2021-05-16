@@ -8,6 +8,8 @@
 
     <integer-array name="selected_colors">
         <item>@android:color/holo_purple</item>
+        <item>@android:color/tertiary_text_dark</item>
+        <item>@android:color/holo_orange_dark</item>
         <item>@android:color/holo_red_light</item>
     </integer-array>
 
@@ -22,6 +24,7 @@
         <item>@string/add</item>
         <item>@string/reduce</item>
         <item>@string/type</item>
+        <item>":D"</item>
     </string-array>
 
 </resources>

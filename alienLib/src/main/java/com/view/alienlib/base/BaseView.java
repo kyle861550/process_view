@@ -11,7 +11,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 /**
- * View 建構基本資訊 & 架構 & 設定
+ * View 建構基本資訊 & 架構 & 設定 & tools
  * @param <T> View 相關訊息
  */
 public abstract class BaseView<T extends ViewInfo> extends View {
@@ -112,18 +112,14 @@ public abstract class BaseView<T extends ViewInfo> extends View {
         return totalHeight - paddingBottom - paddingTop;
     }
 
-    protected float textHeight(Paint paint) {
+    protected float getTextHeight(Paint paint) {
         float offset;
 
         Paint.FontMetrics fm = paint.getFontMetrics();
 
-        offset = (fm.descent + fm.ascent) / 2;
+        offset = (fm.top + fm.bottom);
 
-        return offset;
-    }
-
-    protected float textCenterY(Paint paint, float baseLine) {
-        return baseLine - textHeight(paint);
+        return Math.abs(offset);
     }
 
     @Override

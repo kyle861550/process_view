@@ -18,15 +18,17 @@ public class ProcessViewInfo implements ViewInfo {
 
         public boolean enableCycleLine;
 
-        public int textColor;
         public int[] blockPercent;
         public int blockSelectedColor;
         public int blockUnselectedColor;
         public int[] blockColors;
+        public int arrowFullFlag;
 
         public String[] textsString;
-        public float textNextWordPadding;
-        public int arrowFullFlag;
+        public float textPaddingTopBottomDp;
+        public int textColor;
+        public boolean textAutoZoomOut;
+        public String textSplitKey;
 
         private Shader shader;
 
@@ -59,12 +61,12 @@ public class ProcessViewInfo implements ViewInfo {
                 textsString = new String[1];
             }
 
-            result = textCountFitBlockCount(textsString);
+            result = fixTextCountFitToBlockCount(textsString);
 
             return result;
         }
 
-        private String[] textCountFitBlockCount(String[] strings) {
+        private String[] fixTextCountFitToBlockCount(String[] strings) {
             if(strings == null || strings.length == blockCount) {
                 return strings;
             }
@@ -83,7 +85,7 @@ public class ProcessViewInfo implements ViewInfo {
             return result;
         }
 
-        private void fixWeightCountToFitBlockCount() {
+        private void fixWeightCountFitToBlockCount() {
             if(blockPercent.length == blockCount) {
                 return;
             }
@@ -110,7 +112,7 @@ public class ProcessViewInfo implements ViewInfo {
         private int getTotalPercentWeight() {
             int total = 0;
 
-            fixWeightCountToFitBlockCount();
+            fixWeightCountFitToBlockCount();
 
             for(int item : blockPercent) {
                 total += item;
@@ -137,7 +139,6 @@ public class ProcessViewInfo implements ViewInfo {
     }
 
     public static final class DrawTools {
-        private ProcessViewInfo viewInfo;
         public Paint bolderPaint, blockPaint, textPaint;
     }
 
@@ -162,8 +163,6 @@ public class ProcessViewInfo implements ViewInfo {
 
     @Override
     public void setUsefulSpace(int width, int height) {
-        drawTools.viewInfo = this;
-
         usefulWidth = viewAttr.usefulWidth = width;
         usefulHeight = viewAttr.usefulHeight = height;
     }
